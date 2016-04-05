@@ -1,0 +1,78 @@
+//
+// Base styles
+//
+
+.alert {
+  padding: $alert-padding;
+  margin-bottom: ($spacer-y / 3);
+  border: none;
+  @include border-radius($alert-border-radius);
+}
+
+// Headings for larger alerts
+.alert-heading {
+  // Specified to prevent conflicts of changing $headings-color
+  color: inherit;
+}
+
+// Provide class for links that match alerts
+.alert-link {
+  font-weight: $alert-link-font-weight;
+}
+
+
+// Dismissible alerts
+//
+// Expand the right padding and account for the close button's positioning.
+
+.alert-dismissible {
+  padding-right: ($alert-padding + 20px);
+
+  // Adjust close link position
+  .close {
+    position: relative;
+    top: -2px;
+    right: -21px;
+    color: inherit;
+  }
+}
+
+
+// Alternate styles
+//
+// Generate contextual modifier classes for colorizing the alert.
+
+.alert-success {
+  @include alert-variant($alert-success-bg, $alert-success-border, $alert-success-text);
+}
+.alert-info {
+  @include alert-variant($alert-info-bg, $alert-info-border, $alert-info-text);
+}
+.alert-warning {
+  @include alert-variant($alert-warning-bg, $alert-warning-border, $alert-warning-text);
+}
+.alert-danger {
+  @include alert-variant($alert-danger-bg, $alert-danger-border, $alert-danger-text);
+}
+
+.alert-block {
+  position: fixed;
+  left: 50%;
+  bottom: -100%;
+  width: 30%;
+  margin-left: -15%;
+  
+  animation: slide-in .9s ease-out .7s, slide-out .9s ease-in 10s;
+  animation-fill-mode: forwards;
+}
+
+@keyframes slide-in {
+  0%   { bottom: -100%; }
+  70%  { bottom: 1%; }
+  100% { bottom: 0%; }
+}
+
+@keyframes slide-out {
+  0%   { bottom: 1%; }
+  100% { bottom: -100%; }
+}

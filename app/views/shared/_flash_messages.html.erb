@@ -1,0 +1,9 @@
+<div class="snackbar-block">
+  <% flash.each do |key, val| %>
+    <div class="snackbar snackbar-<%= key %> animated" role="alert">
+      <p>
+        <%= val %>
+      </p>
+    </div>
+  <% end %>
+</div>

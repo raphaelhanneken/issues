@@ -1,0 +1,23 @@
+<div class="modal-dialog" role="document" id="modal-content">
+  <div class="modal-content">
+    <div class="modal-header">
+      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+      <h4 class="modal-title">
+        Edit Labels
+        <small><%= @report.title %></small>
+      </h4>
+    </div>
+    <div class="modal-body">
+      <p id="edit-labels"><%= render @labels %></p>
+      <p id="messages" class="text-xs-center">&nbsp;</p>
+    </div>
+    <div class="modal-footer">
+      <%= link_to 'New Label', new_report_label_path(@report), remote: true, class: 'btn btn-outline-success pull-left' %>
+      <button type="button" data-dismiss="modal" arial-label="Done" class="btn btn-outline-primary">
+        Done
+      </button>
+    </div>
+  </div>
+</div>

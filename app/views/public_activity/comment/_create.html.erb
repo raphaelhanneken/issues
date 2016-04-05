@@ -1,0 +1,21 @@
+<div class="row">
+  <div class="col-xs-2 col-sm-1">
+    <%= link_to activity.owner do %>
+      <%= image_tag activity.owner.avatar.url(:thumb), class: 'img-responsive center-block img-circle' %>
+    <% end %>
+  </div>
+
+  <div class="col-xs-10 col-sm-11">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <span class="text-muted">
+          <%= link_to activity.owner.nickname, activity.owner %>
+          commented <%= time_ago_in_words(activity.created_at) %> ago:
+        </span>
+      </div>
+      <div class="panel-body">
+        <%= activity.trackable.content %>
+      </div>
+    </div>
+  </div>
+</div>

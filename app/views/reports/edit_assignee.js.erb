@@ -1,0 +1,5 @@
+$('#modal-content').replaceWith("<%= escape_javascript(render partial: 'assignee_form', locals: { items: @report } ) %>");
+<% unless Rails.env == 'test' # Capybara can't handle bootstrap switch. %>
+  $('[type="radio"]').bootstrapSwitch();
+<% end %>
+$('#modal').modal('show');

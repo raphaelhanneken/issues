@@ -1,0 +1,3 @@
+$('#modal-content')
+  .replaceWith("<%= escape_javascript(render partial: 'edit_labels', locals: { items: [@report, @labels] }) %>")
+$('#modal').modal('show')

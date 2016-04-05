@@ -1,0 +1,46 @@
+<% content_for :edit_form do %>
+  <%= simple_form_for(@report) do |f| %>
+    <%= render 'shared/errors', object: @report if @report.errors.any? %>
+    <%= f.input :title %>
+    <%= f.input :description, input_html: { rows: 7 } %>
+    <%= f.association :project, include_blank: false, input_html: { class: 'c-select' } %>
+
+    <%= link_to 'Cancel', @report, class: 'btn btn-outline-secondary' %>
+    <span class="pull-right">
+      <%= f.button :submit, class: 'btn-outline-success' %>
+    </span>
+  <% end %>
+<% end %>
+
+<% content_for :new_form do %>
+  <div class="modal-dialog modal-lg" role="document" id="modal-content">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+        <h4 class="modal-title">New Report</h4>
+      </div>
+      <%= simple_form_for(@report, remote: true) do |f| %>
+        <div class="modal-body">
+          <%= render 'shared/errors', object: @report if @report.errors.any? %>
+          <%= f.input :title %>
+          <%= f.input :description, input_html: { rows: 7 } %>
+          <%= f.association :project, include_blank: false, input_html: { class: 'c-select' } %>
+        </div>
+        <div class="modal-footer">
+          <button class="btn btn-outline-secondary pull-left" data-dismiss="modal" type="button">
+            Cancel
+          </button>
+          <%= f.button :submit, class: 'btn-outline-success' %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+<% end %>
+
+<% if @report.new_record? %>
+  <%= yield :new_form %>
+<% else %>
+  <%= yield :edit_form %>
+<% end %>

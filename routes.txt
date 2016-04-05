@@ -1,0 +1,59 @@
+                  Prefix Verb   URI Pattern                                   Controller#Action
+        new_user_session GET    /sign_in(.:format)                            devise/sessions#new
+            user_session POST   /sign_in(.:format)                            devise/sessions#create
+    destroy_user_session DELETE /sign_out(.:format)                           devise/sessions#destroy
+           user_password POST   /password(.:format)                           devise/passwords#create
+       new_user_password GET    /password/new(.:format)                       devise/passwords#new
+      edit_user_password GET    /password/edit(.:format)                      devise/passwords#edit
+                         PATCH  /password(.:format)                           devise/passwords#update
+                         PUT    /password(.:format)                           devise/passwords#update
+cancel_user_registration GET    /cancel(.:format)                             devise/registrations#cancel
+       user_registration POST   /                                             devise/registrations#create
+   new_user_registration GET    /sign_up(.:format)                            devise/registrations#new
+  edit_user_registration GET    /edit(.:format)                               devise/registrations#edit
+                         PATCH  /                                             devise/registrations#update
+                         PUT    /                                             devise/registrations#update
+                         DELETE /                                             devise/registrations#destroy
+                projects GET    /projects(.:format)                           projects#index
+                         POST   /projects(.:format)                           projects#create
+             new_project GET    /projects/new(.:format)                       projects#new
+            edit_project GET    /projects/:id/edit(.:format)                  projects#edit
+                 project GET    /projects/:id(.:format)                       projects#show
+                         PATCH  /projects/:id(.:format)                       projects#update
+                         PUT    /projects/:id(.:format)                       projects#update
+                         DELETE /projects/:id(.:format)                       projects#destroy
+      edit_password_user GET    /users/:id/edit_password(.:format)            users#edit_password
+    update_password_user PUT    /users/:id/update_password(.:format)          users#update_password
+                   users GET    /users(.:format)                              users#index
+               edit_user GET    /users/:id/edit(.:format)                     users#edit
+                    user GET    /users/:id(.:format)                          users#show
+                         PATCH  /users/:id(.:format)                          users#update
+                         PUT    /users/:id(.:format)                          users#update
+                         DELETE /users/:id(.:format)                          users#destroy
+    edit_assignee_report GET    /reports/:id/edit_assignee(.:format)          reports#edit_assignee
+     assign_to_me_report PUT    /reports/:id/assign_to_me(.:format)           reports#assign_to_me
+  update_assignee_report PUT    /reports/:id/update_assignee(.:format)        reports#update_assignee
+            close_report PUT    /reports/:id/close(.:format)                  reports#close
+             open_report PUT    /reports/:id/open(.:format)                   reports#open
+      edit_labels_report GET    /reports/:id/edit_labels(.:format)            reports#edit_labels
+     add_label_to_report PUT    /reports/:id/add_label/:label_id(.:format)    reports#add_label
+remove_label_from_report PUT    /reports/:id/remove_label/:label_id(.:format) reports#remove_label
+           inbox_reports GET    /reports/inbox(.:format)                      reports#index {:filter=>"inbox"}
+ assigned_to_you_reports GET    /reports/assigned_to_you(.:format)            reports#index {:filter=>"assigned_to_you"}
+ reported_by_you_reports GET    /reports/reported_by_you(.:format)            reports#index {:filter=>"reported_by_you"}
+      unassigned_reports GET    /reports/unassigned(.:format)                 reports#index {:filter=>"unassigned"}
+            open_reports GET    /reports/open(.:format)                       reports#index {:filter=>"open"}
+          closed_reports GET    /reports/closed(.:format)                     reports#index {:filter=>"closed"}
+           report_labels POST   /reports/:report_id/labels(.:format)          labels#create
+        new_report_label GET    /reports/:report_id/labels/new(.:format)      labels#new
+                   label GET    /labels/:id(.:format)                         labels#show
+                         DELETE /labels/:id(.:format)                         labels#destroy
+         report_comments POST   /reports/:report_id/comments(.:format)        comments#create
+                 reports GET    /reports(.:format)                            reports#index
+                         POST   /reports(.:format)                            reports#create
+              new_report GET    /reports/new(.:format)                        reports#new
+             edit_report GET    /reports/:id/edit(.:format)                   reports#edit
+                  report GET    /reports/:id(.:format)                        reports#show
+                         PATCH  /reports/:id(.:format)                        reports#update
+                         PUT    /reports/:id(.:format)                        reports#update
+                    root GET    /                                             reports#index {:filter=>"inbox"}

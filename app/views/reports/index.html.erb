@@ -1,0 +1,9 @@
+<div class="col-xs-10">
+  <section class="card card-block">
+    <%= render @reports %>
+  </section>
+</div>
+
+<%= link_to new_report_path, class: 'floating-btn', id: 'new-report', data: { toggle: 'modal' }, remote: true do %>
+  <span class="mega-octicon octicon-plus"></span>
+<% end %>

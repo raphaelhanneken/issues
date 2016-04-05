@@ -1,0 +1,18 @@
+<%= simple_form_for @user do |f| %>
+  <%= render 'shared/errors', object: @user if @user.errors.any? %>
+
+  <%= f.input :email %>
+  <%= f.input :firstname %>
+  <%= f.input :lastname %>
+
+  <% if @user.new_record? %>
+    <%= link_to 'Cancel', root_path, class: 'btn btn-outline-secondary' %>
+  <% else %>
+    <%= link_to 'Cancel', user_path(@user), class: 'btn btn-outline-secondary' %>
+  <% end %>
+  <span class="pull-right">
+    <%= link_to 'Change Password', edit_password_user_path(@user), class: 'btn btn-outline-primary', 
+        id: 'change-password', remote: true unless @user.new_record? %>
+    <%= f.button :submit, class: 'btn-outline-success' %>
+  </span>
+<% end %>

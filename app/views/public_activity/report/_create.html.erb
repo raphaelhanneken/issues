@@ -1,0 +1,20 @@
+<% unless activity.owner.nil? || activity.trackable.nil? %>
+  <div class="row">
+    <div class="col-xs-1">
+      <span class="mega-octicon octicon-issue-opened text-muted"></span>
+    </div>
+    <div class="col-xs-13" style="padding-left:0">
+      <small class="text-muted"><%= time_ago_in_words(activity.created_at) %> ago.</small><br>
+      <span>
+        <% if activity.owner == current_user %>
+          <%= link_to 'You', current_user %>
+        <% else %>
+          <%= link_to activity.owner.firstname + ' ' + activity.owner.lastname, activity.owner %>
+        <% end %>
+        opened report <%= link_to activity.trackable.title, activity.trackable %>.
+      </span>
+      <p class="text-muted short-report-desc"><%= activity.trackable.description %></p>
+    </div>
+  </div>
+  <hr>
+<% end %>

@@ -1,0 +1,17 @@
+<div class="col-xs-12 offset-xs-1 col-sm-12 offset-sm-1 col-md-8 offset-md-3 col-lg-6 offset-lg-4 card card-block">
+  <h2>Forgot Password</h2>
+
+  <%= minimal_form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+    <%= render 'shared/error_message', object: resource if resource.errors.any? %>
+    <%= f.full_error :unlock_token %>
+
+    <div class="form-inputs">
+      <%= f.input :email, required: true, autofocus: true %>
+    </div>
+    <div class="form-actions">
+      <%= f.button :submit, "Reset my password", class: 'btn-block btn-lg' %>
+    </div>
+  <% end %>
+</div>
+
+<%= render "devise/shared/links" %>

@@ -1,0 +1,173 @@
+/* ========================================================================
+ * bootstrap-switch - v3.3.2
+ * http://www.bootstrap-switch.org
+ * ========================================================================
+ * Copyright 2012-2013 Mattia Larentis
+ *
+ * ========================================================================
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ * ========================================================================
+ */
+
+.bootstrap-switch {
+  display: inline-block;
+  cursor: pointer;
+  position: relative;
+  text-align: left;
+  overflow: hidden;
+  border-radius: $switch-border-radius;
+  border: $switch-border;
+  line-height: 8px;
+  z-index: 0;
+  user-select: none;
+  vertical-align: middle;
+  transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
+  margin-right: .8rem;
+
+  .bootstrap-switch-container {
+    display: inline-block;
+    top: 0;
+    border-radius: $switch-border-radius;
+    transform: translate3d(0, 0, 0);
+  }
+
+  .bootstrap-switch-handle-on, .bootstrap-switch-handle-off, .bootstrap-switch-label {
+    box-sizing: border-box;
+    cursor: pointer;
+    display: inline-block !important;
+    height: 100%;
+    padding: 6px 12px;
+    font-size: 14px;
+    line-height: 20px;
+  }
+
+  .bootstrap-switch-handle-on, .bootstrap-switch-handle-off {
+    text-align: center;
+    z-index: 1;
+  }
+
+  .bootstrap-switch-handle-on.bootstrap-switch-primary, .bootstrap-switch-handle-off.bootstrap-switch-primary {
+    color: $switch-color;
+    background: $brand-primary;
+  }
+
+  .bootstrap-switch-handle-on.bootstrap-switch-info, .bootstrap-switch-handle-off.bootstrap-switch-info {
+    color: $switch-color;
+    background: $brand-info;
+  }
+  .bootstrap-switch-handle-on.bootstrap-switch-success, .bootstrap-switch-handle-off.bootstrap-switch-success {
+    color: $switch-color;
+    background: $brand-success;
+  }
+  .bootstrap-switch-handle-on.bootstrap-switch-warning, .bootstrap-switch-handle-off.bootstrap-switch-warning {
+    background: $switch-color;
+    color: $brand-warning;
+  }
+  .bootstrap-switch-handle-on.bootstrap-switch-danger, .bootstrap-switch-handle-off.bootstrap-switch-danger {
+    color: $switch-color;
+    background: $brand-danger;
+  }
+  .bootstrap-switch-handle-on.bootstrap-switch-default, .bootstrap-switch-handle-off.bootstrap-switch-default {
+    color: #000;
+    background: #eeeeee;
+  }
+
+  .bootstrap-switch-label {
+    text-align: center;
+    margin-top: -1px;
+    margin-bottom: -1px;
+    z-index: 100;
+    color: $gray;
+    background: $switch-color;
+  }
+
+  .bootstrap-switch-handle-on {
+//    border-bottom-left-radius: $switch-border-radius;
+//    border-top-left-radius: $switch-border-radius;
+  }
+
+  .bootstrap-switch-handle-off {
+//    border-bottom-right-radius: $switch-border-radius;
+//    border-top-right-radius: $switch-border-radius;
+  }
+
+  input {
+    &[type='radio'], &[type='checkbox'] {
+      position: absolute !important;
+      top: 0;
+      left: 0;
+      margin: 0;
+      z-index: -1;
+      opacity: 0;
+      filter: alpha(opacity = 0);
+    }
+  }
+  &.bootstrap-switch-mini {
+    .bootstrap-switch-handle-on, .bootstrap-switch-handle-off, .bootstrap-switch-label {
+      padding: 1px 5px;
+      font-size: 12px;
+      line-height: 1.5;
+    }
+  }
+  &.bootstrap-switch-small {
+    .bootstrap-switch-handle-on, .bootstrap-switch-handle-off, .bootstrap-switch-label {
+      padding: 5px 10px;
+      font-size: 12px;
+      line-height: 1.5;
+    }
+  }
+  &.bootstrap-switch-large {
+    .bootstrap-switch-handle-on, .bootstrap-switch-handle-off, .bootstrap-switch-label {
+      padding: 6px 16px;
+      font-size: 18px;
+      line-height: 1.3333333;
+    }
+  }
+  &.bootstrap-switch-disabled, &.bootstrap-switch-readonly, &.bootstrap-switch-indeterminate {
+    cursor: default !important;
+  }
+  &.bootstrap-switch-disabled .bootstrap-switch-handle-on, &.bootstrap-switch-readonly .bootstrap-switch-handle-on, &.bootstrap-switch-indeterminate .bootstrap-switch-handle-on, &.bootstrap-switch-disabled .bootstrap-switch-handle-off, &.bootstrap-switch-readonly .bootstrap-switch-handle-off, &.bootstrap-switch-indeterminate .bootstrap-switch-handle-off, &.bootstrap-switch-disabled .bootstrap-switch-label, &.bootstrap-switch-readonly .bootstrap-switch-label, &.bootstrap-switch-indeterminate .bootstrap-switch-label {
+    opacity: 0.5;
+    filter: alpha(opacity = 50);
+    cursor: default !important;
+  }
+  &.bootstrap-switch-animate .bootstrap-switch-container {
+    transition: margin-left 0.5s;
+  }
+  &.bootstrap-switch-inverse {
+    .bootstrap-switch-handle-on {
+//      border-bottom-left-radius: 0;
+//      border-top-left-radius: 0;
+//      border-bottom-right-radius: $switch-border-radius;
+//      border-top-right-radius: $switch-border-radius;
+    }
+    .bootstrap-switch-handle-off {
+//      border-bottom-right-radius: 0;
+//      border-top-right-radius: 0;
+//      border-bottom-left-radius: $switch-border-radius;
+//      border-top-left-radius: $switch-border-radius;
+    }
+  }
+  &.bootstrap-switch-focused {
+    border-color: $brand-primary;
+    outline: 0;
+  }
+  &.bootstrap-switch-on .bootstrap-switch-label, &.bootstrap-switch-inverse.bootstrap-switch-off .bootstrap-switch-label {
+//    border-bottom-right-radius: $switch-border-radius;
+//    border-top-right-radius: $switch-border-radius;
+  }
+  &.bootstrap-switch-off .bootstrap-switch-label, &.bootstrap-switch-inverse.bootstrap-switch-on .bootstrap-switch-label {
+//    border-bottom-left-radius: $switch-border-radius;
+//    border-top-left-radius: $switch-border-radius;
+  }
+}

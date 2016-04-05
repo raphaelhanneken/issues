@@ -1,0 +1,87 @@
+//
+// Base styles
+//
+
+@mixin snack-variant($link-color) {
+  > a {
+    color: $link-color;
+    text-transform: uppercase;
+  }
+}
+
+.snackbar {
+  padding: $snack-padding;
+  margin-bottom: ($spacer-y / 2);
+  border: none;
+  background-color: $snack-bg;
+  color: $snack-text;
+  @include border-radius($snack-border-radius);
+}
+
+// Headings for larger snacks
+.snackbar-heading {
+  // Specified to prevent conflicts of changing $headings-color
+  color: inherit;
+}
+
+// Provide class for links that match snacks
+.snackbar-link {
+  font-weight: $snack-link-font-weight;
+}
+
+
+// Dismissible snacks
+//
+// Expand the right padding and account for the close button's positioning.
+
+.snackbar-dismissible {
+  padding-right: ($snack-padding + 20px);
+
+  // Adjust close link position
+  .close {
+    position: relative;
+    top: -2px;
+    right: -21px;
+    color: inherit;
+  }
+}
+
+.snackbar-block {
+  position: fixed;
+  left: 50%;
+  bottom: -100%;
+  width: 30%;
+  margin-left: -15%;
+  z-index: $zindex-snackbar;
+
+  animation: slide-in 1s ease-out .5s, slide-out 1s ease-in 10s;
+  animation-fill-mode: forwards;
+}
+
+// Alternate styles
+//
+// Generate contextual modifier classes for colorizing the snack.
+
+.snack-success {
+  @include snack-variant($snack-success-link);
+}
+.snack-info {
+  @include snack-variant($snack-info-link);
+}
+.snack-warning {
+  @include snack-variant($snack-warning-link);
+}
+.snack-danger {
+  @include snack-variant($snack-danger-link);
+}
+
+@keyframes slide-in {
+  0%   { bottom: -100%; }
+  70%  { bottom: 1%; }
+  100% { bottom: 0%; }
+}
+
+@keyframes slide-out {
+  0%   { bottom: 0%; }
+  100% { bottom: -100%; }
+}

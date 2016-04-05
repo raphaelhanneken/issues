@@ -1,0 +1,56 @@
+<% if controller.controller_name == 'users' && @user.nil? == false %>
+  <div class="col-xs-3">
+    <div class="profile mega">
+      <%= @user.firstname[0] %>
+    </div>
+    <hr>
+    <dl class="dl-horizontal">
+      <dt>E-Mail</dt>
+      <dd><%= @user.email %></dd>
+    </dl>
+  </div>
+<% else %>
+<div class="col-xs-2 col-sm-3">
+  <nav class="nav nav-pills nav-stacked">
+    <%= navigation_link_to root_path, class: 'nav-link' do %>
+      <span class="octicon octicon-inbox navbar-icon"></span>
+      <span class="hidden-sm-down">Inbox</span>
+    <% end %>
+    <%= navigation_link_to assigned_to_you_reports_path, class: 'nav-link' do %>
+      <span class="octicon octicon-eye navbar-icon"></span>
+      <span class="hidden-sm-down">Assigned to You</span>
+    <% end %>
+    <%= navigation_link_to reported_by_you_reports_path, class: 'nav-link' do %>
+      <span class="octicon octicon-light-bulb navbar-icon"></span>
+      <span class="hidden-sm-down">Reported by You</span>
+    <% end %>
+    <%= navigation_link_to unassigned_reports_path, class: 'nav-link' do %>
+      <span class="octicon octicon-gist-secret navbar-icon"></span>
+      <span class="hidden-sm-down">Unassigned</span>
+    <% end %>
+    <%= navigation_link_to open_reports_path, class: 'nav-link' do %>
+      <span class="octicon octicon-issue-opened navbar-icon"></span>
+      <span class="hidden-sm-down">Open</span>
+    <% end %>
+    <%= navigation_link_to closed_reports_path, class: 'nav-link' do %>
+      <span class="octicon octicon-issue-closed navbar-icon"></span>
+      <span class="hidden-sm-down">Closed</span>
+    <% end %>
+    <%= navigation_link_to reports_path, class: 'nav-link' do %>
+      <span class="octicon octicon-bug navbar-icon"></span>
+      <span class="hidden-sm-down">All</span>
+    <% end %>
+  </nav>
+  <hr>
+  <p class="text-xs-center">
+  <% Label.all.each do |label| %>
+    <%= link_to label_path(label) do %>
+      <span class="label" style="background-color:<%= label.color %>">
+        <i class="octicon octicon-tag"></i>
+        <%=label.title%>
+      </span>
+    <% end %>
+  <% end %>
+  </p>
+</div>
+<% end %>

@@ -1,0 +1,23 @@
+<div class="modal-dialog" role="document" id="modal-content">
+  <div class="modal-content">
+    <div class="modal-header">
+      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+      <h4 class="modal-title">New Label</h4>
+    </div>
+    <%= simple_form_for @label, url: report_labels_path(@report, @label), method: 'post', remote: true do |f| %>
+      <div class="modal-body">
+        <%= render 'shared/errors', object: @label if @label.errors.any? %>
+        <%= f.input :title, required: true %>
+        <%= f.input :color, as: :colorpicker %>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-outline-secondary pull-left" data-dismiss="modal" type="button">
+          Cancel
+        </button>
+        <%= f.button :submit, class: 'btn-outline-success' %>
+      </div>
+    <% end %>
+  </div>
+</div>

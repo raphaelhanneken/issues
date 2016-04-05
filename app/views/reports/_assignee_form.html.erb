@@ -1,0 +1,21 @@
+<div class="modal-dialog" role="document" id="modal-content">
+  <div class="modal-content">
+    <div class="modal-header">
+      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+      <h4 class="modal-title">Edit Assignee</h4>
+    </div>
+    <%= simple_form_for(@report, url: update_assignee_report_path(@report), method: :put) do |f| %>
+      <div class="modal-body">
+        <%= f.association :assignee, as: :radio_buttons, label_method: :name, include_blank: true %>
+      </div>
+      <div class="modal-footer">
+        <button type="button" data-dismiss="modal" arial-label="Cancel" class="btn btn-outline-secondary pull-left">
+          Cancel
+        </button>
+        <%= f.button :submit, 'Assign', class: 'btn-outline-success' %>
+      </div>
+    <% end %>
+  </div>
+</div>

@@ -1,0 +1,11 @@
+<div class="col-xs-10">
+  <section class="card card-block">
+    <h3>Edit Report</h3>
+    <hr>
+    <%= render 'form' %>
+  </section>
+</div>
+
+<%= link_to new_report_path, class: 'floating-btn btn-primary', id: 'new-report', remote: true do %>
+  <span class="mega-octicon octicon-plus"></span>
+<% end %>

@@ -1,0 +1,31 @@
+<nav class="navbar navbar-fixed-top navbar-dark bg-primary">
+  <!--<div class="container-fluid">-->
+    <div class="row">
+      <div class="col-xs-3">
+        <%= link_to "Issues", root_path, class: 'navbar-brand' %>
+      </div>
+      <div class="col-xs-10">
+        <%= render 'shared/search' %>
+      </div>
+      <div class="col-xs-1">
+        <nav class="nav navbar-nav pull-xs-right">
+          <!-- Dropdown navigation start -->
+          <li class="nav-item dropdown">
+            <a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown" role="button" aria-haspopup="true"
+              aria-expanded="false" style="padding-right:0">
+              <span class="profile"><%= current_user.firstname[0] %></span>
+            </a>
+            <nav class="dropdown-menu right">
+              <%= link_to 'Your Profile', current_user, class: 'dropdown-item' %>
+              <%= link_to 'Projects', projects_path, class: 'dropdown-item' %>
+              <%= link_to 'Users', users_path, class: 'dropdown-item' %>
+              <div class="dropdown-divider"></div>
+              <%= link_to 'Sign Out', destroy_user_session_path, method: 'delete', class: 'dropdown-item' %>
+            </nav>
+          </li>
+          <!-- Dropdown navigation end -->
+        </nav>
+      </div>
+    </div>
+    <!--</div>-->
+</nav>

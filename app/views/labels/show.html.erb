@@ -1,0 +1,19 @@
+<div class="col-xs-10">
+  <section class="card card-block">
+    <span class="label" style="background-color:<%= @label.color %>">
+      <i class="octicon octicon-tag"></i>
+      <%= @label.title %>
+    </span>
+    <% if current_user.admin? %>
+      <span class="actions">
+        <%= link_to 'Delete Label', label_path(@label), class: 'btn btn-sm btn-outline-danger', method: 'delete' %>
+      </span>
+    <% end %>
+    <hr>
+    <%= render @label.reports %>
+  </section>
+</div>
+
+<%= link_to new_report_path, class: 'floating-btn', id: 'new-report', data: { toggle: 'modal' }, remote: true do %>
+  <span class="mega-octicon octicon-plus"></span>
+<% end %>

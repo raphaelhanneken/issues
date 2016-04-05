@@ -1,0 +1,8 @@
+var ele = $('#edit-labels #label-<%= escape_javascript(@label.id.to_s) %>');
+
+ele.attr('href', "<%= escape_javascript(add_label_to_report_path(@report, @label)) %>");
+ele.removeClass('remove').addClass('add');
+
+$('#modal-content #messages').html("Label removed.");
+
+$('#report-labels #label-<%= escape_javascript(@label.id.to_s) %>').remove();

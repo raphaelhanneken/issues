@@ -1,0 +1,19 @@
+<div class="col-xs-10">
+  <div class="card card-block">
+    <h2>
+      <%= @user.name %>
+      <% if @user == current_user %>
+        <span style="display:inline-block;float:right">
+          <%= link_to 'Edit', edit_user_path(@user), class: 'btn btn-outline-primary btn-sm' %>
+          <%= link_to 'Delete', user_path(@user), method: 'delete', confirm: 'Are you sure?', class: 'btn btn-outline-danger btn-sm' %>
+        </span>
+      <% end %>
+    </h2>
+    <hr>
+    <% unless @activities.nil? %>
+      <%= render_activity @activities %>
+    <% else %>
+      <p class="text-xs-center">No Activities.</p>
+    <% end %>
+  </div>
+</div>
