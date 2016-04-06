@@ -10,5 +10,4 @@ env:
 
 before_script: psql -c 'create database issues_test;' -U postgres
 
-script:
-  – RAILS_ENV=test bundle exec rake –trace db:migrate spec
+script: RAILS_ENV=test bundle exec rake –trace db:migrate spec
