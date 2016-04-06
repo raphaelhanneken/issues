@@ -18,6 +18,3 @@
 
 # Ignore the Finder stuff.
 .DS_Store
-
-/config/database.yml
-/config/secrets.yml
