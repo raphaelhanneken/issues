@@ -137,7 +137,7 @@ RSpec.describe "Managing Reports", type: :feature do
       label = report.labels.first
       visit report_path(report)
       within '#report-labels' do
-        click_link "label-#{label.id}"
+        find("#label-#{label.id}").trigger('click')
       end
       wait_for_ajax
       within '#report-labels' do

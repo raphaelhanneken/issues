@@ -22,11 +22,9 @@ RSpec.describe "Managing Labels", type: :feature do
     wait_for_ajax
     click_on 'New Label'
     wait_for_ajax
-    within '#new_label' do
-      fill_in 'label_title', with: 'A Label'
-      fill_in 'label_color', with: '#90A959'
-      click_on 'Create'
-    end
+    fill_in 'label_title', with: 'A Label'
+    fill_in 'label_color', with: '#90A959'
+    click_on 'Create'
     expect(page).to have_current_path report_path(report)
     expect(page).to have_content 'New label added.'
   end
