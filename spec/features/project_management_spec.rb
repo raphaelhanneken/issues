@@ -6,19 +6,19 @@ RSpec.describe "Managing Projects", type: :feature do
   before(:each) do
     login_as(user, scope: :user)
   end
-  
+
   describe 'Creating a new project' do
     before(:each) do
       visit new_project_url
     end
-    
+
     scenario 'with valid data' do
       within 'form#new_project' do
         fill_in 'Name', with: 'A new Project'
         click_on 'Create'
       end
       expect(page).to have_content('created')
-      expect(page).to have_current_path('/projects/1')
+      expect(page).to have_current_path(project_path(Project.last))
     end
 
     scenario 'with invalid data' do
@@ -33,27 +33,27 @@ RSpec.describe "Managing Projects", type: :feature do
 
   describe 'Updating an existing project' do
     let(:project) { FactoryGirl.create(:project) }
-    
+
     before(:each) do
       visit edit_project_url(project)
     end
 
     scenario 'with valid data' do
-      within 'form#edit_project_1' do
+      within 'form.edit_project' do
         fill_in 'Name', with: 'New Project Name'
         click_on 'Update'
       end
       expect(page).to have_content('updated')
-      expect(page).to have_current_path('/projects/1')
+      expect(page).to have_current_path(project_path(project))
     end
 
     scenario 'with invalid data' do
-      within 'form#edit_project_1' do
+      within 'form.edit_project' do
         fill_in 'Name', with: '  '
         click_on 'Update'
       end
       expect(page).to have_content('can\'t be blank')
-      expect(page).to have_current_path('/projects/1')
+      expect(page).to have_current_path(project_path(project))
     end
   end
 

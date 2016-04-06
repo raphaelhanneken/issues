@@ -51,7 +51,7 @@ RSpec.describe "Managing Reports", type: :feature do
     end
 
     scenario 'with valid data' do
-      within 'form#edit_report_1' do
+      within 'form.edit_report' do
         fill_in  'report_title', with: 'A new title'
         click_on 'Update'
       end
@@ -60,7 +60,7 @@ RSpec.describe "Managing Reports", type: :feature do
     end
 
     scenario 'with invalid data' do
-      within 'form#edit_report_1' do
+      within 'form.edit_report' do
         fill_in  'report_title', with: '  '
         click_on 'Update'
       end
@@ -134,10 +134,10 @@ RSpec.describe "Managing Reports", type: :feature do
     end
 
     scenario 'removing a label' do
-      label = report.labels.first.title
+      label_title = report.labels.first.title
       visit report_path(report)
       within '#report-labels' do
-        click_on label
+        click_on label_title
       end
       wait_for_ajax
       within '#report-labels' do
