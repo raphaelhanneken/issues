@@ -4,9 +4,6 @@ source 'https://rubygems.org'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.6'
 
-# Use PostgreSQL as Database
-gem 'pg'
-
 # Use SCSS for stylesheets
 gem 'sass-rails'
 # Use Uglifier as compressor for JavaScript assets
@@ -60,6 +57,11 @@ gem 'bootstrap_colorpicker_rails'
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
+
+group :production do
+  # Use Postgres as production database.
+  gem 'pg'
+end
 
 
 group :development, :test do
