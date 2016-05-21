@@ -90,14 +90,10 @@ class UsersController < ApplicationController
     end
 
     def correct_user?
-      unless @user == current_user
-        redirect_to root_path, flash: { error: 'Permission denied.' }
-      end
+      redirect_to root_path, flash: { error: 'Permission denied.' } unless @user == current_user
     end
 
     def correct_user_or_admin?
-      unless current_user.admin?
-        correct_user?
-      end
+      correct_user? unless current_user.admin?
     end
 end
