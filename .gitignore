@@ -18,7 +18,3 @@
 
 # Ignore the Finder stuff.
 .DS_Store
-
-*.lock
-
-Gemfile.lock
