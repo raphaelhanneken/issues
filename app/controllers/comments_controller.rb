@@ -11,8 +11,6 @@
 #
 
 class CommentsController < ApplicationController
-  before_action :permit_params, :only => :create
-
   # POST /reports/:report_id/comments
   def create
     @comment = current_user.comments.build(permit_params)
@@ -23,7 +21,6 @@ class CommentsController < ApplicationController
     end
     redirect_to @comment.report
   end
-
 
   private
 
