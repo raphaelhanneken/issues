@@ -34,7 +34,8 @@ class UsersController < ApplicationController
 
   # GET /users/:id
   def show
-    @activities = PublicActivity::Activity.where(owner: @user).order(created_at: 'desc')
+    @activities = PublicActivity::Activity.where("owner_id = ? OR recipient_id = ?", @user, @user)
+      .order(created_at: 'desc')
   end
 
   # GET /users/:id/edit
