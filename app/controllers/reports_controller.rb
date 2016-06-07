@@ -58,6 +58,7 @@ class ReportsController < ApplicationController
   # PUT   /reports/:id
   def update
     if @report.update(report_params)
+      @report.create_activity action: 'update'
       redirect_to @report, flash: { success: 'Report updated.' }
     else
       render :edit
