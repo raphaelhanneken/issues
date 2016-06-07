@@ -68,6 +68,7 @@ class ReportsController < ApplicationController
   # PUT /assign_to_me
   def assign_to_me
     if @report.update(assignee: current_user)
+      @report.create_activity(action: 'update_assignee')
       redirect_to @report, flash: { success: 'Assigned to you.' }
     else
       redirect_to @report, flash: { error: 'Error.' }
