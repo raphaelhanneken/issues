@@ -81,6 +81,7 @@ class ReportsController < ApplicationController
   # PUT /reports/:id/update_assignee
   def update_assignee
     if @report.update(params.require(:report).permit(:assignee_id))
+      @report.create_activity(action: 'update_assignee')
       redirect_to @report, flash: { success: 'Assignee updated.' }
     else
       redirect_to @report, flash: { error: 'Error.' }
