@@ -115,7 +115,8 @@ class ReportsController < ApplicationController
 
   # PUT /reports/:id/remove_label/:label_id
   def remove_label
-    @report.labels.delete @label
+    @report.labels.delete(@label)
+    @report.create_activity(action: 'remove_label', params: { title: @label.title, color: @label.color })
   end
 
   # PUT /reports/:id/add_label/:label_id
