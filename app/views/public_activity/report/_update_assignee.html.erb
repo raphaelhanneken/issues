@@ -1,0 +1,22 @@
+<% unless activity.owner.nil? || activity.trackable.nil? || activity.recipient.nil? %>
+  <div class="row">
+    <div class="col-xs-1 text-xs-right">
+      <span class="octicon octicon-squirrel text-muted"></span>
+    </div>
+    <div class="col-xs-13" style="padding-left:0">
+      <small class="text-muted">
+        <% if activity.owner == activity.recipient %>
+          <%= link_to activity.owner.name, activity.owner %> self-assigned
+          <%= link_to activity.trackable.title, activity.trackable %>
+          <%= time_ago_in_words(activity.created_at) %> ago.
+        <% else %>
+          <%= link_to activity.owner.name, activity.owner %> assigned
+          <%= link_to activity.trackable.title, activity.trackable %> to
+          <%= link_to activity.recipient.name, activity.recipient %>
+          <%= time_ago_in_words(activity.created_at) %> ago.
+        <% end %>
+      </small>
+    </div>
+  </div>
+  <hr>
+<% end %>

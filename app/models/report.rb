@@ -15,8 +15,7 @@
 
 class Report < ActiveRecord::Base
   include PublicActivity::Model
-  # TODO: Public Activity tracking
-  # tracked
+  tracked owner: :reporter, recipient: :assignee, except: :update
 
   belongs_to :project
   belongs_to :reporter, class_name: 'User', foreign_key: 'reporter_id'
