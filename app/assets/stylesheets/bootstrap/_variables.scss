@@ -180,6 +180,9 @@ $display2-weight: 300 !default;
 $display3-weight: 300 !default;
 $display4-weight: 300 !default;
 
+$hr-border-color: $gray-lighter !default;
+$hr-border-width: 1px !default;
+
 $headings-margin-bottom: ($spacer * 1.5) !default;
 $headings-font-family:   inherit !default;
 $headings-font-weight:   ($font-weight-base + 100) !default;
