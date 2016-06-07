@@ -89,6 +89,7 @@ class ReportsController < ApplicationController
   # PUT /reports/:id/close
   def close
     if @report.update(closed: true)
+      @report.create_activity(action: 'closed')
       redirect_to @report, flash: { success: 'Report closed.' }
     else
       redirect_to @report, flash: { error: 'Error.' }
@@ -98,6 +99,7 @@ class ReportsController < ApplicationController
   # PUT /reports/:id/open
   def open
     if @report.update(closed: false)
+      @report.create_activity(action: 'reopened')
       redirect_to @report, flash: { success: 'Report opened.' }
     else
       redirect_to @report, flash: { error: 'Error.' }
