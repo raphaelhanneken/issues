@@ -1,0 +1,19 @@
+<% unless activity.owner.nil? || activity.trackable.nil? || activity.parameters.nil? %>
+  <div class="row">
+    <div class="col-xs-1 text-xs-right">
+      <span class="octicon octicon-issue-closed text-muted"></span>
+    </div>
+    <div class="col-xs-13" style="padding-left:0">
+      <small class="text-muted">
+        <%= link_to activity.owner.name, activity.owner %> added label
+        <span class="label" style="background-color:<%= activity.parameters[:color] %>">
+          <i class="octicon octicon-tag"></i>
+          <%= activity.parameters[:title] %>
+        </span> to
+        <%= link_to activity.trackable.title, activity.trackable %>
+        <%= time_ago_in_words(activity.created_at) %> ago.
+      </small>
+    </div>
+  </div>
+  <hr>
+<% end %>
