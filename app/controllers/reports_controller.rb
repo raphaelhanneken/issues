@@ -32,7 +32,7 @@ class ReportsController < ApplicationController
   # GET /reports/:id
   def show
     @comment = current_user.comments.new
-    # @activities = PublicActivity::Activity.where(trackable: @report).order(created_at: 'desc')
+    @activities = PublicActivity::Activity.where(trackable: @report).order(created_at: 'desc')
   end
 
   # GET /reports/new
