@@ -15,7 +15,7 @@ class CommentsController < ApplicationController
   def create
     @comment = current_user.comments.build(permit_params)
     if @comment.save
-      @comment.report.create_activity(action: 'comment', params: { content: @comment.content })
+      @comment.report.create_activity action: 'comment', owner: current_user, params: { content: @comment.content }
       flash[:success] = 'Comment created.'
     else
       flash[:error] = 'Error.'

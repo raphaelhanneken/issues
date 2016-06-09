@@ -15,7 +15,7 @@
 
 class Report < ActiveRecord::Base
   include PublicActivity::Model
-  tracked owner: Proc.new { |controller, model| controller.current_user }, recipient: :assignee, except: :update
+  tracked recipient: :assignee, except: :update
 
   belongs_to :project
   belongs_to :reporter, class_name: 'User', foreign_key: 'reporter_id'

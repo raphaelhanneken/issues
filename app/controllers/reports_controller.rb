@@ -44,6 +44,7 @@ class ReportsController < ApplicationController
   def create
     @report = current_user.reported.build(report_params)
     if @report.save
+      @report.create_activity action: 'create', owner: current_user, recipient: @report.assignee
       redirect_ajax_to @report, flash: { success: 'Report created.' }
     else
       render :new
@@ -58,7 +59,7 @@ class ReportsController < ApplicationController
   # PUT   /reports/:id
   def update
     if @report.update(report_params)
-      @report.create_activity action: 'update'
+      @report.create_activity action: 'update', owner: current_user, recipient: @report.assignee
       redirect_to @report, flash: { success: 'Report updated.' }
     else
       render :edit
@@ -68,7 +69,7 @@ class ReportsController < ApplicationController
   # PUT /assign_to_me
   def assign_to_me
     if @report.update(assignee: current_user)
-      @report.create_activity(action: 'update_assignee')
+      @report.create_activity action: 'update_assignee', owner: current_user, recipient: @report.assignee
       redirect_to @report, flash: { success: 'Assigned to you.' }
     else
       redirect_to @report, flash: { error: 'Error.' }
@@ -82,7 +83,7 @@ class ReportsController < ApplicationController
   # PUT /reports/:id/update_assignee
   def update_assignee
     if @report.update(params.require(:report).permit(:assignee_id))
-      @report.create_activity(action: 'update_assignee')
+      @report.create_activity action: 'update_assignee', owner: current_user
       redirect_to @report, flash: { success: 'Assignee updated.' }
     else
       redirect_to @report, flash: { error: 'Error.' }
@@ -92,7 +93,7 @@ class ReportsController < ApplicationController
   # PUT /reports/:id/close
   def close
     if @report.update(closed: true)
-      @report.create_activity(action: 'closed')
+      @report.create_activity action: 'closed', owner: current_user
       redirect_to @report, flash: { success: 'Report closed.' }
     else
       redirect_to @report, flash: { error: 'Error.' }
@@ -102,7 +103,7 @@ class ReportsController < ApplicationController
   # PUT /reports/:id/open
   def open
     if @report.update(closed: false)
-      @report.create_activity(action: 'reopened')
+      @report.create_activity action: 'reopened', owner: current_user
       redirect_to @report, flash: { success: 'Report opened.' }
     else
       redirect_to @report, flash: { error: 'Error.' }
@@ -117,13 +118,13 @@ class ReportsController < ApplicationController
   # PUT /reports/:id/remove_label/:label_id
   def remove_label
     @report.labels.delete(@label)
-    @report.create_activity(action: 'remove_label', params: { title: @label.title, color: @label.color })
+    @report.create_activity action: 'remove_label', owner: current_user, params: { title: @label.title, color: @label.color }
   end
 
   # PUT /reports/:id/add_label/:label_id
   def add_label
     @report.labels.append(@label)
-    @report.create_activity(action: 'add_label', params: { title: @label.title, color: @label.color })
+    @report.create_activity action: 'add_label', owner: current_user, params: { title: @label.title, color: @label.color }
   end
 
   private
