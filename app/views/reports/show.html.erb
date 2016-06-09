@@ -9,18 +9,18 @@
     <h3>
       <%= @report.title %>
       <small class="text-muted">#<%= @report.id.to_s %></small>
-
-      <% if @report.assignee?(current_user) || @report.reporter?(current_user) %>
-        <span class="actions">
+      <span class="actions">
+        <% if @report.assignee?(current_user) || @report.reporter?(current_user) %>
           <% if @report.closed? %>
             <%= link_to 'Reopen', open_report_path(@report), class: 'btn btn-outline-danger btn-sm', method: 'put' %>
           <% else %>
             <%= link_to 'Close', close_report_path(@report), class: 'btn btn-outline-success btn-sm', method: 'put' %>
           <% end %>
-
+        <% end %>
+        <% if @report.reporter?(current_user) %>
           <%= link_to 'Edit', edit_report_path(@report), class: 'btn btn-outline-secondary btn-sm' %>
-        </span>
-      <% end %>
+        <% end %>
+      </span>
     </h3>
     <hr>
     <p id="report-labels">

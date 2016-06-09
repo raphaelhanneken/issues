@@ -115,8 +115,8 @@ RSpec.describe "reports/show", type: :view do
       render
     end
 
-    it 'displays an edit link' do
-      expect(response).to have_link('Edit', href: edit_report_path(report))
+    it 'displays no edit link' do
+      expect(response).not_to have_link('Edit', href: edit_report_path(report))
     end
 
     it 'displays an update assignee link' do
