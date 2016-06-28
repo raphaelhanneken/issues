@@ -12,7 +12,6 @@
 class ProjectsController < ApplicationController
   before_action :set_project,    except: [:index, :new, :create]
   before_action :requires_admin, except: [:index, :show]
-  
 
   # GET /projects
   def index
@@ -68,7 +67,7 @@ class ProjectsController < ApplicationController
     def project_params
       params.require(:project).permit(:name, :description, :version, :url, :owner_id)
     end
-    
+
     def requires_admin
       redirect_to root_path, flash: { error: 'Permission denied.' } unless current_user.admin?
     end
