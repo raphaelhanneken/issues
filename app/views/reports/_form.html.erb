@@ -21,11 +21,11 @@
         </button>
         <h4 class="modal-title">New Report</h4>
       </div>
-      <%= simple_form_for(@report, remote: true) do |f| %>
+      <%= minimal_form_for(@report, remote: true) do |f| %>
         <div class="modal-body">
           <%= render 'shared/errors', object: @report if @report.errors.any? %>
           <%= f.input :title %>
-          <%= f.input :description, input_html: { rows: 7 } %>
+          <%= f.input :description, input_html: { rows: 12 } %>
           <%= f.association :project, include_blank: false, input_html: { class: 'c-select' } %>
         </div>
         <div class="modal-footer">
