@@ -19,8 +19,8 @@ RSpec.describe "Managing Reports", type: :feature do
 
     scenario 'with valid data' do
       within 'form#new_report' do
-        fill_in 'Title', with: 'A Title'
-        fill_in 'Description', with: 'Hello World! This is a description.'
+        fill_in 'report_title', with: 'A Title'
+        fill_in 'report_description', with: 'Hello World! This is a description.'
 
         click_on 'Create'
       end
