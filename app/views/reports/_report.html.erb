@@ -1,8 +1,6 @@
 <div class="row">
   <div class="col-xs-1" style="padding-right:0">
-    <%= link_to report.reporter, class: 'profile' do %>
-      <%= report.reporter.firstname[0] %>
-    <% end %>
+    <%= link_to report.reporter.abbr, report.reporter, class: 'profile' %>
   </div>
   <div class="col-xs-12">
     <%= link_to report, class: 'report' do %>
