@@ -40,4 +40,8 @@ class User < ActiveRecord::Base
   def name
     "#{firstname} #{lastname}"
   end
+
+  def abbr
+    "#{firstname[0]}#{lastname[0]}"
+  end
 end
