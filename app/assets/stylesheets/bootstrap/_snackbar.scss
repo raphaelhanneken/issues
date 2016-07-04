@@ -54,7 +54,7 @@
   margin-left: -15%;
   z-index: $zindex-snackbar;
 
-  animation: slide-in 1s ease-out .5s, slide-out 1s ease-in 10s;
+  animation: slidein 1s ease-out .5s, slideout 1s ease-in 8s;
   animation-fill-mode: forwards;
 }
 
@@ -75,13 +75,13 @@
   @include snack-variant($snack-danger-link);
 }
 
-@keyframes slide-in {
+@keyframes slidein {
   0%   { bottom: -100%; }
   70%  { bottom: 1%; }
   100% { bottom: 0%; }
 }
 
-@keyframes slide-out {
+@keyframes slideout {
   0%   { bottom: 0%; }
   100% { bottom: -100%; }
 }
