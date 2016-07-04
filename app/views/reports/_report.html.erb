@@ -7,10 +7,12 @@
   <div class="col-xs-12">
     <%= link_to report, class: 'report' do %>
       <small class="text-muted"><%= time_ago_in_words(report.created_at)%> ago</small>
-      <h6><%= report.title %></h6>
-      <p class="text-muted">
-        <%= truncate(report.description, length: 85, seperator: ' ') %>
-      </p>
+      <h6>
+        <%= report.title %>
+        <small class="text-muted">
+          &mdash; <%= truncate(report.description, length: 85, seperator: ' ') %>
+        </small>
+      </h6>
     <% end %>
   </div>
   <div class="col-xs-1">
