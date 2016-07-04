@@ -6,7 +6,7 @@
       </button>
       <h4 class="modal-title">New Label</h4>
     </div>
-    <%= simple_form_for @label, url: report_labels_path(@report, @label), method: 'post', remote: true do |f| %>
+    <%= minimal_form_for @label, url: report_labels_path(@report, @label), method: 'post', remote: true do |f| %>
       <div class="modal-body">
         <%= render 'shared/errors', object: @label if @label.errors.any? %>
         <%= f.input :title, required: true %>
