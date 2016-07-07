@@ -137,6 +137,7 @@ RSpec.describe "Managing Reports", type: :feature do
     scenario 'removing a label' do
       label = report.labels.first
       visit report_path(report)
+      expect(page).to have_content label.title
       click_on 'Edit Labels'
       wait_for_ajax
       within '#edit-labels' do
