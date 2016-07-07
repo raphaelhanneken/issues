@@ -126,8 +126,9 @@ RSpec.describe "Managing Reports", type: :feature do
       within '#edit-labels' do
         click_on label.title
       end
-      click_on 'Done'
       wait_for_ajax
+      expect(page).to have_content 'Label added.'
+      click_on 'Done'
       within '#report-labels' do
         expect(page).to have_content label.title
       end
@@ -136,10 +137,14 @@ RSpec.describe "Managing Reports", type: :feature do
     scenario 'removing a label' do
       label = report.labels.first
       visit report_path(report)
-      within '#report-labels' do
-        find("#label-#{label.id}").trigger('click')
+      click_on 'Edit Labels'
+      wait_for_ajax
+      within '#edit-labels' do
+        click_on label.title
       end
       wait_for_ajax
+      expect(page).to have_content 'Label removed.'
+      click_on 'Done'
       within '#report-labels' do
         expect(page).not_to have_content label.title
       end
