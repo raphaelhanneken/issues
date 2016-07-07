@@ -979,6 +979,10 @@ RSpec.describe ReportsController, type: :controller do
           expect(report.labels).to include label
         end
 
+        it 'assigns a success message' do
+          expect(flash['success']).to eq 'Label added.'
+        end
+
         it 'renders the add_label template' do
           expect(response).to render_template 'add_label'
         end
@@ -1005,12 +1009,16 @@ RSpec.describe ReportsController, type: :controller do
           expect(report.labels).to include label
         end
 
+        it 'assigns a success message' do
+          expect(flash['success']).to eq 'Label added.'
+        end
+
         it 'renders the add_label template' do
           expect(response).to render_template 'add_label'
         end
       end
 
-      context 'who is neither assigned nor has reported to requested report' do
+      context 'who is neither assigned nor has reported the requested report' do
         let!(:label) { FactoryGirl.create(:label) }
         let(:report) { FactoryGirl.create(:report) }
 
@@ -1073,6 +1081,10 @@ RSpec.describe ReportsController, type: :controller do
           expect(report.labels).not_to include label
         end
 
+        it 'assigns a success message' do
+          expect(flash['success']).to eq 'Label removed.'
+        end
+
         it 'renders the remove_label template' do
           expect(response).to render_template 'remove_label'
         end
@@ -1097,6 +1109,10 @@ RSpec.describe ReportsController, type: :controller do
         it 'removes the requested label from the requested report' do
           report.reload
           expect(report.labels).not_to include label
+        end
+
+        it 'assigns a success message' do
+          expect(flash['success']).to eq 'Label removed.'
         end
 
         it 'renders the remove_label template' do
