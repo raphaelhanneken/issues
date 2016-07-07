@@ -124,7 +124,7 @@ RSpec.describe "Managing Reports", type: :feature do
       click_on 'Edit Labels'
       wait_for_ajax
       within '#edit-labels' do
-        click_on label.title
+        click_link "label-#{label.id}"
       end
       wait_for_ajax
       expect(page).to have_content 'Label added.'
@@ -140,7 +140,7 @@ RSpec.describe "Managing Reports", type: :feature do
       click_on 'Edit Labels'
       wait_for_ajax
       within '#edit-labels' do
-        click_on label.title
+        click_link "label-#{label.id}"
       end
       wait_for_ajax
       expect(page).to have_content 'Label removed.'
