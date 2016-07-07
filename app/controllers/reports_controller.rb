@@ -119,12 +119,14 @@ class ReportsController < ApplicationController
   def remove_label
     @report.labels.delete(@label)
     @report.create_activity action: 'remove_label', owner: current_user, params: { title: @label.title, color: @label.color }
+    flash.now[:success] = 'Label removed.'
   end
 
   # PUT /reports/:id/add_label/:label_id
   def add_label
     @report.labels.append(@label)
     @report.create_activity action: 'add_label', owner: current_user, params: { title: @label.title, color: @label.color }
+    flash.now[:success] = 'Label added.'
   end
 
   private
