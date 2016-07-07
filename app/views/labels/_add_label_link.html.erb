@@ -1,0 +1,11 @@
+<li class="add-label">
+  <%= link_to add_label_to_report_path(report, label), remote: true, method: 'put', id: "label-#{label.id}" do %>
+    <i class="octicon octicon-check label-circle" style="background-color:<%= label.color %>"></i>
+    <i class="octicon octicon-x label-circle" style="background-color:<%= label.color %>"></i>
+    <i class="octicon octicon-tag label-circle" style="background-color:<%= label.color %>"></i>
+    <i class="octicon octicon-plus label-circle" style="background-color:<%= label.color %>"></i>
+    <%= label.title %>
+    <small class="remove action">Remove</small>
+    <small class="add action">Add</small>
+  <% end %>
+</li>
