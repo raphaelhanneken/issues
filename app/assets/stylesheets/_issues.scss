@@ -181,19 +181,82 @@ body.devise {
 .c-select {
   display: inline-block;
   max-width: 100%;
-  -webkit-appearance: none;
+  appearance: none;
   padding: .375rem 1.75rem .375rem .75rem;
   padding-right: .75rem\9;
   color: #55595c;
   vertical-align: middle;
   background: #fff url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAUCAMAAACzvE1FAAAADFBMVEUzMzMzMzMzMzMzMzMKAG/3AAAAA3RSTlMAf4C/aSLHAAAAPElEQVR42q3NMQ4AIAgEQTn//2cLdRKppSGzBYwzVXvznNWs8C58CiussPJj8h6NwgorrKRdTvuV9v16Afn0AYFOB7aYAAAAAElFTkSuQmCC) no-repeat right .75rem center;
   background-image: none\9;
-  -webkit-background-size: 8px 10px;
   background-size: 8px 10px;
-  -moz-appearance: none
 }
 
 .actions {
   display: inline-block;
   float: right;
+}
+
+#edit-labels {
+  padding-left: 0;
+
+  li {
+    list-style: none;
+
+    a {
+      display: block;
+      padding: .2rem 1.5rem;
+      line-height: 2.2rem;
+
+      .label-circle {
+        &.octicon {
+          display: block;
+          float: left;
+          width: 2rem;
+          border-radius: 10rem;
+          color: #fff;
+          line-height: 2;
+          text-align: center;
+          margin-right: 1rem;
+        }
+
+        &.octicon-x, &.octicon-plus {
+          display: none;
+        }
+      }
+
+      .action {
+        display: none;
+      }
+    }
+  }
+
+  li:hover {
+    .label-circle {
+      &.octicon-tag, &.octicon-check {
+        display: none;
+      }
+
+      &.octicon-x, &.octicon-plus {
+        display: block;
+      }
+    }
+
+    .action {
+      display: block;
+      float: right;
+      text-transform: uppercase;
+    }
+  }
+
+  li.remove-label {
+    .octicon-tag { display: none !important; }
+    .octicon-plus { display: none !important; }
+    .add.action { display: none !important; }
+  }
+
+  li.add-label {
+    .octicon-check { display: none !important; }
+    .octicon-x { display: none !important; }
+    .remove.action { display: none !important; }
+  }
 }
