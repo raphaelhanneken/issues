@@ -6,7 +6,7 @@ $.rails.allowAction = (element) ->
   $link = element.clone()
     .removeAttr('class')
     .removeAttr('data-confirm')
-    .addClass('btn').addClass('btn-danger')
+    .addClass('btn').addClass('btn-outline-danger')
     .html("Yes, delete.")
 
   modal_html = """
@@ -23,7 +23,9 @@ $.rails.allowAction = (element) ->
                       <p>#{message}</p>
                     </div>
                     <div class="modal-footer">
-                      <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                      <button type="button" class="btn btn-outline-secondary pull-left" data-dismiss="modal">
+                        Cancel
+                      </button>
                     </div>
                   </div>
                 </div>

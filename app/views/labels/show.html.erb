@@ -6,7 +6,8 @@
     </span>
     <% if current_user.admin? %>
       <span class="actions">
-        <%= link_to 'Delete Label', label_path(@label), class: 'btn btn-sm btn-outline-danger', method: 'delete' %>
+        <%= link_to 'Delete Label', label_path(@label), class: 'btn btn-sm btn-outline-danger', method: 'delete',
+        data: { confirm: "Are you sure you want to delete the '#{@label.title}' label?" } %>
       </span>
     <% end %>
     <hr>
