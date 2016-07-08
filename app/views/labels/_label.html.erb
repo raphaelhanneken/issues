@@ -1,32 +1,6 @@
-<% if @report.nil? %>
-  <%= link_to label_path(label) do %>
-    <span class="label" style="background-color:<%= label.color %>">
-      <i class="octicon octicon-tag"></i>
-      <span class="title"><%= label.title %></span>
-    </span>
-  <% end %>
-<% else %>
-  <% unless @report.labels.include? label %>
-    <%= link_to add_label_to_report_path(@report, label), method: 'put', remote: true,
-        id: "label-#{label.id}", class: 'label-link add' do %>
-    <span class="label" style="background-color:<%= label.color %>">
-      <i class="octicon octicon-check"></i>
-      <i class="octicon octicon-x"></i>
-      <i class="octicon octicon-tag"></i>
-      <i class="octicon octicon-plus"></i>
-      <span class="title"><%= label.title %></span>
-    </span>
-    <% end %>
-  <% else %>
-    <%= link_to remove_label_from_report_path(@report, label), method: 'put', remote: true,
-        id: "label-#{label.id}", class: 'label-link remove' do %>
-    <span class="label" style="background-color:<%= label.color %>">
-      <i class="octicon octicon-check"></i>
-      <i class="octicon octicon-x"></i>
-      <i class="octicon octicon-tag"></i>
-      <i class="octicon octicon-plus"></i>
-      <span class="title"><%= label.title %></span>
-    </span>
-    <% end %>
-  <% end %>
+<%= link_to label_path(label) do %>
+  <span class="label" style="background-color:<%= label.color %>">
+    <span class="octicon octicon-tag"></span>
+    <span><%= label.title %></span>
+  </span>
 <% end %>

@@ -44,7 +44,7 @@ class ReportsController < ApplicationController
   def create
     @report = current_user.reported.build(report_params)
     if @report.save
-      @report.create_activity action: 'create', owner: current_user, recipient: @report.assignee
+      @report.create_activity action: 'create', owner: current_user
       redirect_ajax_to @report, flash: { success: 'Report created.' }
     else
       render :new
@@ -59,7 +59,7 @@ class ReportsController < ApplicationController
   # PUT   /reports/:id
   def update
     if @report.update(report_params)
-      @report.create_activity action: 'update', owner: current_user, recipient: @report.assignee
+      @report.create_activity action: 'update', owner: current_user
       redirect_to @report, flash: { success: 'Report updated.' }
     else
       render :edit
@@ -69,7 +69,7 @@ class ReportsController < ApplicationController
   # PUT /assign_to_me
   def assign_to_me
     if @report.update(assignee: current_user)
-      @report.create_activity action: 'update_assignee', owner: current_user, recipient: @report.assignee
+      @report.create_activity action: 'update_assignee', owner: current_user
       redirect_to @report, flash: { success: 'Assigned to you.' }
     else
       redirect_to @report, flash: { error: 'Error.' }
@@ -119,12 +119,14 @@ class ReportsController < ApplicationController
   def remove_label
     @report.labels.delete(@label)
     @report.create_activity action: 'remove_label', owner: current_user, params: { title: @label.title, color: @label.color }
+    flash.now[:success] = 'Label removed.'
   end
 
   # PUT /reports/:id/add_label/:label_id
   def add_label
     @report.labels.append(@label)
     @report.create_activity action: 'add_label', owner: current_user, params: { title: @label.title, color: @label.color }
+    flash.now[:success] = 'Label added.'
   end
 
   private

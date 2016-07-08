@@ -1,8 +1,6 @@
 var ele = $('#edit-labels #label-<%= escape_javascript(@label.id.to_s) %>');
 
 ele.attr('href', "<%= escape_javascript(remove_label_from_report_path(@report, @label)) %>");
-ele.removeClass('add').addClass('remove');
+ele.parent().removeClass('add-label').addClass('remove-label');
 
-$('#modal-content #messages').html("Label added.");
-
-$('#report-labels').append(ele);
+$('body').append("<%= escape_javascript(render('shared/flash_messages')) %>");

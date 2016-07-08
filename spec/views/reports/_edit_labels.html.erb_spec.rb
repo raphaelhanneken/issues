@@ -15,7 +15,7 @@ RSpec.describe 'reports/_edit_labels', type: :view do
   end
 
   it 'displays a done button' do
-    expect(rendered).to have_button 'Done'
+    expect(rendered).to have_link 'Done'
   end
 
   it 'renders the available labels' do

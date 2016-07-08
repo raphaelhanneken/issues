@@ -10,14 +10,19 @@
       </h4>
     </div>
     <div class="modal-body">
-      <p id="edit-labels"><%= render @labels %></p>
-      <p id="messages" class="text-xs-center">&nbsp;</p>
+      <ul id="edit-labels" class="col-xs-10 offset-xs-2">
+        <% @labels.each do |label| %>
+          <% if @report.labels.include? label %>
+            <%= render partial: 'labels/remove_label_link', locals: { report: @report, label: label } %>
+          <% else %>
+            <%= render partial: 'labels/add_label_link', locals: { report: @report, label: label } %>
+          <% end %>
+        <% end %>
+      </ul>
     </div>
     <div class="modal-footer">
       <%= link_to 'New Label', new_report_label_path(@report), remote: true, class: 'btn btn-outline-success pull-left' %>
-      <button type="button" data-dismiss="modal" arial-label="Done" class="btn btn-outline-primary">
-        Done
-      </button>
+      <%= link_to 'Done', @report, class: 'btn btn-outline-primary' %>
     </div>
   </div>
 </div>

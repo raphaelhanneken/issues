@@ -10,6 +10,8 @@
 #
 
 class Label < ActiveRecord::Base
+  include PublicActivity::Model
+
   has_and_belongs_to_many :reports
 
   validates :title, presence: true,
