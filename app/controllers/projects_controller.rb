@@ -69,6 +69,6 @@ class ProjectsController < ApplicationController
     end
 
     def requires_admin
-      redirect_to root_path, flash: { error: 'Permission denied.' } unless current_user.admin?
+      permission_denied unless current_user.admin?
     end
 end

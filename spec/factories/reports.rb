@@ -17,7 +17,7 @@ require 'faker'
 
 FactoryGirl.define do
   factory :report, class: :report do
-    title       { Faker::Lorem.sentence(2) }
+    title       { Faker::Lorem.word }
     description { Faker::Lorem.paragraph(2) }
     association :project,  factory: :project
     association :assignee, factory: :user

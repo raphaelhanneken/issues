@@ -63,8 +63,6 @@ class LabelsController < ApplicationController
     end
 
     def correct_user
-      unless @report.is_reporter?(current_user) || @report.is_assignee?(current_user)
-        redirect_to root_path, flash: { error: 'Permission denied.' }
-      end
+      permission_denied unless @report.is_reporter?(current_user) || @report.is_assignee?(current_user)
     end
 end

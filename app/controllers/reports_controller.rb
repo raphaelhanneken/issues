@@ -148,11 +148,11 @@ class ReportsController < ApplicationController
     end
 
     def correct_user?
-      redirect_to root_path, flash: { error: 'Permission denied.' } unless @report.assignee?(current_user) || @report.reporter?(current_user)
+      permission_denied unless @report.assignee?(current_user) || @report.reporter?(current_user)
     end
 
     def reporter?
-      redirect_to root_path, flash: { error: 'Permission denied.' } unless @report.reporter?(current_user)
+      permission_denied unless @report.reporter?(current_user)
     end
 
     def filter_reports
