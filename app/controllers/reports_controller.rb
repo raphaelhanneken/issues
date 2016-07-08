@@ -44,7 +44,7 @@ class ReportsController < ApplicationController
   def create
     @report = current_user.reported.build(report_params)
     if @report.save
-      @report.create_activity action: 'create', owner: current_user, recipient: @report.assignee
+      @report.create_activity action: 'create', owner: current_user
       redirect_ajax_to @report, flash: { success: 'Report created.' }
     else
       render :new
@@ -59,7 +59,7 @@ class ReportsController < ApplicationController
   # PUT   /reports/:id
   def update
     if @report.update(report_params)
-      @report.create_activity action: 'update', owner: current_user, recipient: @report.assignee
+      @report.create_activity action: 'update', owner: current_user
       redirect_to @report, flash: { success: 'Report updated.' }
     else
       render :edit
@@ -69,7 +69,7 @@ class ReportsController < ApplicationController
   # PUT /assign_to_me
   def assign_to_me
     if @report.update(assignee: current_user)
-      @report.create_activity action: 'update_assignee', owner: current_user, recipient: @report.assignee
+      @report.create_activity action: 'update_assignee', owner: current_user
       redirect_to @report, flash: { success: 'Assigned to you.' }
     else
       redirect_to @report, flash: { error: 'Error.' }

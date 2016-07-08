@@ -29,7 +29,9 @@ class LabelsController < ApplicationController
   def create
     @label = Label.new(permit_params)
     if @label.save
+      @label.create_activity action: 'create', owner: current_user, params: { title: @label.title, color: @label.color }
       @report.labels << @label
+      @report.create_activity action: 'add_label', owner: current_user, params: { title: @label.title, color: @label.color }
       redirect_ajax_to @report, flash: { success: 'New label added.' }
     else
       render :new
