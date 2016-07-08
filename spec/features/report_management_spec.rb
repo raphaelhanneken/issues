@@ -155,22 +155,6 @@ RSpec.describe "Managing Reports", type: :feature do
         expect(page).not_to have_content label.title
       end
     end
-
-    scenario 'creating a label' do
-      visit report_path(report)
-      click_on 'Edit Labels'
-      wait_for_ajax
-      click_on 'New Label'
-      wait_for_ajax
-      within '#new_label' do
-        fill_in 'label_title', with: 'Hellooo Label'
-        fill_in 'label_color', with: '#fafafa'
-      end
-      click_on 'Create Label'
-      within '#report-labels' do
-        expect(page).to have_content 'Hellooo Label'
-      end
-    end
   end
 
   describe 'Commenting' do
