@@ -59,7 +59,7 @@ class UsersController < ApplicationController
   # PUT /users/:id/update_password
   def update_password
     if @user.update_with_password(permit_password_params)
-      sign_in(@user, bypass: true)
+      bypass_sign_in(@user)
       redirect_ajax_to @user, flash: { success: 'Password updated.' }
     else
       render :edit_password
