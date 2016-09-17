@@ -13,7 +13,7 @@
           <li class="nav-item dropdown">
             <a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown" role="button" aria-haspopup="true"
               aria-expanded="false" style="padding-right:0">
-              <span class="profile"><%= current_user.firstname[0] %></span>
+              <span class="profile"><%= current_user.abbr %></span>
             </a>
             <nav class="dropdown-menu right">
               <%= link_to 'Your Profile', current_user, class: 'dropdown-item' %>
