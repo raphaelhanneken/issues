@@ -1026,10 +1026,6 @@ RSpec.describe ReportsController, type: :controller do
           xhr :put, :add_label, { id: report.to_param, label_id: label.to_param }
         end
 
-        it 'redirects to the root path' do
-          expect(response).to redirect_to root_path
-        end
-
         it 'assigns a flash message' do
           expect(flash['error']).to eq 'Permission denied.'
         end
@@ -1126,10 +1122,6 @@ RSpec.describe ReportsController, type: :controller do
 
         before(:each) do
           xhr :put, :remove_label, { id: report.to_param, label_id: label.to_param }
-        end
-
-        it 'redirects to the root path' do
-          expect(response).to redirect_to root_path
         end
 
         it 'assigns a flash message' do
