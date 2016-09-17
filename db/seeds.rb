@@ -7,6 +7,7 @@
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
 User.create(email: 'root@issues.com', password: '12345678', firstname: 'Root', lastname: 'User')
+User.create(email: 'example.user@mail.com', password: '12345687', firstname: 'Example', lastname: 'User')
 
 if Rails.env.development?
   lorem = """
