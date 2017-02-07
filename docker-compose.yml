@@ -6,8 +6,8 @@ services:
     volumes:
       - ./db/postgres/data:/var/lib/postgresql/data
     environment:
-      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
       POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
 
   app:
     build: .
@@ -20,4 +20,5 @@ services:
     environment:
       DB_USER: ${POSTGRES_USER}
       DB_PASSWORD: ${POSTGRES_PASSWORD}
-      DB: postgresql
+      DB_HOST: ${POSTGRES_HOST}
+      DB_ADAPTER: postgresql

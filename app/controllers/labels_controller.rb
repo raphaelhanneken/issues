@@ -50,19 +50,19 @@ class LabelsController < ApplicationController
 
   private
 
-    def permit_params
-      params.require(:label).permit(:title, :color)
-    end
+  def permit_params
+    params.require(:label).permit(:title, :color)
+  end
 
-    def set_label
-      @label = Label.find(params[:id])
-    end
+  def set_label
+    @label = Label.find(params[:id])
+  end
 
-    def set_report
-      @report = Report.find(params[:report_id])
-    end
+  def set_report
+    @report = Report.find(params[:report_id])
+  end
 
-    def correct_user
-      permission_denied unless @report.is_reporter?(current_user) || @report.is_assignee?(current_user)
-    end
+  def correct_user
+    permission_denied unless @report.is_reporter?(current_user) || @report.is_assignee?(current_user)
+  end
 end
