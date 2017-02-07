@@ -1,7 +1,7 @@
 FROM ruby:2.3
 
 RUN apt-get update -y \
-  && apt-get install -y --no-install-recommends nodejs postgresql-client \
+  && apt-get install -y --no-install-recommends nodejs npm postgresql-client \
   && rm -rf /var/lib/apt/lists/*
 
 RUN mkdir -p /usr/src/app
