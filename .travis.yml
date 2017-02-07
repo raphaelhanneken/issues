@@ -5,8 +5,7 @@ rvm:
   2.3.0-p0
 
 env:
-  – DB=sqlite
-  – DB=postgresql
+  – DB_ADAPTER=postgresql
 
 before_script: psql -c 'create database issues_test;' -U postgres
 
