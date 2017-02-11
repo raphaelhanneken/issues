@@ -11,17 +11,17 @@ class ApplicationController < ActionController::Base
 
   protected
 
-    def configure_permitted_parameters
-      devise_parameter_sanitizer.permit(:sign_up) do |u|
-        u.permit(:email, :firstname, :lastname, :password, :password_confirmation)
-      end
+  def configure_permitted_parameters
+    devise_parameter_sanitizer.permit(:sign_up) do |u|
+      u.permit(:email, :firstname, :lastname, :password, :password_confirmation)
     end
+  end
 
-    def requires_admin
-      permission_denied unless current_user.admin?
-    end
+  def requires_admin
+    permission_denied unless current_user.admin?
+  end
 
-    def permission_denied
-      redirect_to root_path, flash: { error: 'Permission denied.' }
-    end
+  def permission_denied
+    redirect_to root_path, flash: { error: 'Permission denied.' }
+  end
 end
