@@ -1,7 +1,6 @@
-language:
-  ruby
+language: ruby
 rvm: 2.3.3
 env:
   – ADAPTER=postgres
 
-script: RAILS_ENV=test bundle exec rake --trace db:create db:schema:load db:migrate rspec spec/
+script: RAILS_ENV=test bundle exec rake --trace db:create db:schema:load db:migrate spec spec/
