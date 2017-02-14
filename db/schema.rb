@@ -13,6 +13,9 @@
 
 ActiveRecord::Schema.define(version: 20160311161156) do
 
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
   create_table "activities", force: :cascade do |t|
     t.integer  "trackable_id"
     t.string   "trackable_type"
@@ -26,9 +29,9 @@ ActiveRecord::Schema.define(version: 20160311161156) do
     t.datetime "updated_at"
   end
 
-  add_index "activities", ["owner_id", "owner_type"], name: "index_activities_on_owner_id_and_owner_type"
-  add_index "activities", ["recipient_id", "recipient_type"], name: "index_activities_on_recipient_id_and_recipient_type"
-  add_index "activities", ["trackable_id", "trackable_type"], name: "index_activities_on_trackable_id_and_trackable_type"
+  add_index "activities", ["owner_id", "owner_type"], name: "index_activities_on_owner_id_and_owner_type", using: :btree
+  add_index "activities", ["recipient_id", "recipient_type"], name: "index_activities_on_recipient_id_and_recipient_type", using: :btree
+  add_index "activities", ["trackable_id", "trackable_type"], name: "index_activities_on_trackable_id_and_trackable_type", using: :btree
 
   create_table "comments", force: :cascade do |t|
     t.text     "content"
@@ -38,8 +41,8 @@ ActiveRecord::Schema.define(version: 20160311161156) do
     t.datetime "updated_at", null: false
   end
 
-  add_index "comments", ["report_id"], name: "index_comments_on_report_id"
-  add_index "comments", ["user_id"], name: "index_comments_on_user_id"
+  add_index "comments", ["report_id"], name: "index_comments_on_report_id", using: :btree
+  add_index "comments", ["user_id"], name: "index_comments_on_user_id", using: :btree
 
   create_table "labels", force: :cascade do |t|
     t.string   "title"
@@ -53,8 +56,8 @@ ActiveRecord::Schema.define(version: 20160311161156) do
     t.integer "report_id", null: false
   end
 
-  add_index "labels_reports", ["label_id", "report_id"], name: "index_labels_reports_on_label_id_and_report_id", unique: true
-  add_index "labels_reports", ["report_id", "label_id"], name: "index_labels_reports_on_report_id_and_label_id", unique: true
+  add_index "labels_reports", ["label_id", "report_id"], name: "index_labels_reports_on_label_id_and_report_id", unique: true, using: :btree
+  add_index "labels_reports", ["report_id", "label_id"], name: "index_labels_reports_on_report_id_and_label_id", unique: true, using: :btree
 
   create_table "projects", force: :cascade do |t|
     t.string   "name",                    null: false
@@ -74,9 +77,9 @@ ActiveRecord::Schema.define(version: 20160311161156) do
     t.boolean  "closed",      default: false
   end
 
-  add_index "reports", ["assignee_id"], name: "index_reports_on_assignee_id"
-  add_index "reports", ["project_id"], name: "index_reports_on_project_id"
-  add_index "reports", ["reporter_id"], name: "index_reports_on_reporter_id"
+  add_index "reports", ["assignee_id"], name: "index_reports_on_assignee_id", using: :btree
+  add_index "reports", ["project_id"], name: "index_reports_on_project_id", using: :btree
+  add_index "reports", ["reporter_id"], name: "index_reports_on_reporter_id", using: :btree
 
   create_table "users", force: :cascade do |t|
     t.string   "firstname",                              null: false
@@ -96,7 +99,7 @@ ActiveRecord::Schema.define(version: 20160311161156) do
     t.string   "last_sign_in_ip"
   end
 
-  add_index "users", ["email"], name: "index_users_on_email", unique: true
-  add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
+  add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
+  add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
 
 end
