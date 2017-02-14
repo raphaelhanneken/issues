@@ -2,12 +2,10 @@ version: '2'
 
 services:
   db:
-    image: postgres:9
+    image: postgres:9-alpine
     volumes:
-      - ./db/postgres/data:/var/lib/postgresql/data
-    environment:
-      POSTGRES_USER: ${POSTGRES_USER}
-      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      - ./db/postgres/data:/var/lib/postgresql/data/pg
+    env_file: .env
 
   app:
     build: .
@@ -17,8 +15,4 @@ services:
       - .:/usr/src/app
     ports:
       - 3000:3000
-    environment:
-      DB_USER: ${POSTGRES_USER}
-      DB_PASSWORD: ${POSTGRES_PASSWORD}
-      DB_HOST: ${POSTGRES_HOST}
-      DB_ADAPTER: postgresql
+    env_file: .env
