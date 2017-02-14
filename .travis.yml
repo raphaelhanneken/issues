@@ -2,7 +2,7 @@ language:
   ruby
 
 rvm:
-  2.3.0-p0
+  2.3.3p222
 
 env:
   – ADAPTER=postgres
