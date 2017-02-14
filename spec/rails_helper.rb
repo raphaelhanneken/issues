@@ -64,8 +64,8 @@ RSpec.configure do |config|
   config.include RSpecHtmlMatchers
 
   # Include the Devise test helpers
-  config.include Devise::TestHelpers, type: :controller
-  config.include Devise::TestHelpers, type: :view
+  config.include Devise::Test::ControllerHelpers, :type => :controller
+  config.include Devise::Test::ControllerHelpers, :type => :view
 
   config.include Warden::Test::Helpers
   config.before :suite do
