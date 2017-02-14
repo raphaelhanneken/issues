@@ -5,7 +5,7 @@ rvm:
   2.3.0-p0
 
 env:
-  – DB_ADAPTER=postgresql
+  – ADAPTER=postgres
 
 before_script: psql -c 'create database issues_test;' -U postgres
 
