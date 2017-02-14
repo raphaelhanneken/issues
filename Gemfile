@@ -2,7 +2,10 @@ source 'https://rubygems.org'
 
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '4.2.6'
+gem 'rails', '~> 4.2.0'
+
+# Use Postgres as RDBMS.
+gem 'pg'
 
 # Use SCSS for stylesheets
 gem 'sass-rails'
@@ -11,7 +14,7 @@ gem 'uglifier'
 # Use CoffeeScript for .coffee assets and views
 gem 'coffee-rails'
 # See https://github.com/rails/execjs#readme for more supported runtimes
-gem 'therubyracer', platforms: :ruby
+# gem 'therubyracer', platforms: :ruby
 
 # Use jquery as the JavaScript library
 gem 'jquery-rails'
@@ -24,25 +27,18 @@ gem 'sdoc'
 
 # Automatically prefix CSS attributes
 gem 'autoprefixer-rails'
-
 # Use Octicons
 gem 'octicons-rails'
-
 # Generate forms with Simple Form
 gem 'simple_form'
-
 # Use Devise for user authentication
 gem 'devise'
-
 # Generate a activity feed with Public Activity
 gem 'public_activity'
-
 # Use Pauma as the app server
 gem 'puma'
-
 # Automatically annotate models
 gem 'annotate_models'
-
 # Use Bootstrap Colorpicker for label colors
 gem 'bootstrap_colorpicker_rails'
 
@@ -58,25 +54,13 @@ gem 'bootstrap_colorpicker_rails'
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
-group :production do
-  # Use Postgres as production database.
-  gem 'pg'
-end
-
-
 group :development, :test do
-  # Use sqlite3 as the database for Active Record
-  gem 'sqlite3'
-
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug'
-
   # Do unit testing with RSpec
   gem 'rspec-rails'
-
   # Add HTML Matchers to RSpec
   gem 'rspec-html-matchers'
-
   # Add additional matchers to RSpec
   gem 'shoulda-matchers'
 end
@@ -84,7 +68,6 @@ end
 group :development do
   # Access an IRB console on exception pages or by using <%= console %> in views
   gem 'web-console'
-
   # Spring speeds up development by keeping your application running in the background. Read more:
   # https://github.com/rails/spring
   gem 'spring'
@@ -93,22 +76,12 @@ end
 group :test do
   # Use FactoryGirl for fixtures
   gem 'factory_girl_rails'
-
   # Generate random data with Faker
   gem 'faker'
-
-  # Automatically run specs, when they're saved
-  gem 'guard-rspec'
-
-  # Display a notification when guard finishes
-  gem 'terminal-notifier-guard'
-
   # Simulate user interaction via Capybara
   gem 'capybara'
-
   # Use WebKit as default webdriver
   gem 'poltergeist'
-
   # Clean the database via truncation, since poltergeist...
   gem 'database_cleaner'
 end
