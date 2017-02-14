@@ -20,7 +20,7 @@ RSpec.describe LabelsController, type: :controller do
     context 'as signed in user' do
       before(:each) do
         sign_in user
-        get :show, { id: label.to_param }
+        get :show, id: label.to_param
       end
 
       it 'responds with https status success' do
@@ -38,7 +38,7 @@ RSpec.describe LabelsController, type: :controller do
 
     context 'as guest user' do
       it 'redirects to the sign in page' do
-        get :show, { id: 3 }
+        get :show, id: 3
         expect(response).to redirect_to new_user_session_path
       end
     end
@@ -50,7 +50,7 @@ RSpec.describe LabelsController, type: :controller do
     context 'as signed in user' do
       before(:each) do
         sign_in user
-        xhr :get, :new, { report_id: report.to_param }
+        xhr :get, :new, report_id: report.to_param
       end
 
       it 'responds with http status success' do
@@ -68,12 +68,12 @@ RSpec.describe LabelsController, type: :controller do
 
     context 'as guest user' do
       it 'redirects to the sign in page' do
-        get :new, { report_id: report.to_param }
+        get :new, report_id: report.to_param
         expect(response).to redirect_to new_user_session_path
       end
 
       it 'responds with http status 300 via xhr' do
-        xhr :get, :new, { report_id: report.to_param }
+        xhr :get, :new, report_id: report.to_param
         expect(response).to have_http_status :unauthorized
       end
     end
@@ -91,13 +91,13 @@ RSpec.describe LabelsController, type: :controller do
         let!(:label) { FactoryGirl.attributes_for(:label) }
 
         before(:each) do
-          xhr :post, :create, { report_id: report.to_param, label: label }
+          xhr :post, :create, report_id: report.to_param, label: label
         end
 
         it 'creates a new label' do
-          expect {
-            xhr :post, :create, { report_id: report.to_param, label: label }
-          }.to change(Label, :count).by(1)
+          expect do
+            xhr :post, :create, report_id: report.to_param, label: label
+          end.to change(Label, :count).by(1)
         end
 
         it 'creates and persists a new instance of Label' do
@@ -115,7 +115,7 @@ RSpec.describe LabelsController, type: :controller do
         end
 
         it 'redirects to the requested report' do
-          expect(response.headers["Content-Type"]).to eq("text/javascript; charset=utf-8")
+          expect(response.headers['Content-Type']).to eq('text/javascript; charset=utf-8')
           expect(response.body).to include("window.location = '#{report_url(report)}'")
         end
       end
@@ -124,7 +124,7 @@ RSpec.describe LabelsController, type: :controller do
         let!(:label) { FactoryGirl.attributes_for(:label, title: nil) }
 
         before(:each) do
-          xhr :post, :create, { report_id: report.to_param, label: label }
+          xhr :post, :create, report_id: report.to_param, label: label
         end
 
         it 'creates a new instance of Label without persisting' do
@@ -146,12 +146,12 @@ RSpec.describe LabelsController, type: :controller do
       let(:label) { FactoryGirl.attributes_for(:label) }
 
       it 'redirects to the sign in page' do
-        post :create, { report_id: report.to_param, label: label }
+        post :create, report_id: report.to_param, label: label
         expect(response).to redirect_to new_user_session_path
       end
 
       it 'responds with http status 300 via xhr' do
-        xhr :post, :create, { report_id: report.to_param, label: label }
+        xhr :post, :create, report_id: report.to_param, label: label
         expect(response).to have_http_status :unauthorized
       end
     end
@@ -168,13 +168,13 @@ RSpec.describe LabelsController, type: :controller do
       context 'with admin privileges' do
         before(:each) do
           sign_in admin
-          delete :destroy, { id: label.to_param }
+          delete :destroy, id: label.to_param
         end
 
         it 'deletes the requested label' do
-          expect {
-            delete :destroy, { id: labol.to_param }
-          }.to change(Label, :count).by(-1)
+          expect do
+            delete :destroy, id: labol.to_param
+          end.to change(Label, :count).by(-1)
         end
 
         it 'redirects to the root path' do
@@ -189,13 +189,13 @@ RSpec.describe LabelsController, type: :controller do
       context 'without admin privileges' do
         before(:each) do
           sign_in user
-          delete :destroy, { id: label.to_param }
+          delete :destroy, id: label.to_param
         end
 
         it 'does not delete the requested label' do
-          expect {
-            delete :destroy, { id: labol.to_param }
-          }.not_to change(Label, :count)
+          expect do
+            delete :destroy, id: labol.to_param
+          end.not_to change(Label, :count)
         end
 
         it 'redirects to the root path' do
@@ -210,7 +210,7 @@ RSpec.describe LabelsController, type: :controller do
 
     context 'as guest user' do
       it 'redirects to the sign in page' do
-        delete :destroy, { id: label.to_param }
+        delete :destroy, id: label.to_param
         expect(response).to redirect_to new_user_session_path
       end
     end

@@ -61,7 +61,7 @@ RSpec.describe UsersController, type: :controller do
     context 'as signed in user' do
       before(:each) do
         sign_in session_user
-        get :show, { id: user.to_param }
+        get :show, id: user.to_param
       end
 
       it 'responds with http success' do
@@ -79,7 +79,7 @@ RSpec.describe UsersController, type: :controller do
 
     context 'as guest user' do
       it 'redirects to the sign in page' do
-        get :show, { id: user.to_param }
+        get :show, id: user.to_param
         expect(response).to redirect_to(new_user_session_url)
       end
     end
@@ -95,7 +95,7 @@ RSpec.describe UsersController, type: :controller do
 
       describe 'for the current_users profile' do
         before(:each) do
-          get :edit, { id: session_user.to_param }
+          get :edit, id: session_user.to_param
         end
 
         it 'responds with http success' do
@@ -113,7 +113,7 @@ RSpec.describe UsersController, type: :controller do
 
       describe 'for another users profile' do
         before(:each) do
-          get :edit, { id: user.to_param }
+          get :edit, id: user.to_param
         end
 
         it 'redirects to the root path' do
@@ -128,7 +128,7 @@ RSpec.describe UsersController, type: :controller do
 
     context 'as guest user' do
       it 'redirects to the sign in page' do
-        get :edit, { id: user.to_param }
+        get :edit, id: user.to_param
         expect(response).to redirect_to(new_user_session_url)
       end
     end
@@ -147,7 +147,7 @@ RSpec.describe UsersController, type: :controller do
           let(:valid_update_params) { FactoryGirl.attributes_for(:user) }
 
           before(:each) do
-            put :update, { id: session_user.to_param, user: valid_update_params }
+            put :update, id: session_user.to_param, user: valid_update_params
           end
 
           it 'assigns the requested user to @user' do
@@ -172,7 +172,7 @@ RSpec.describe UsersController, type: :controller do
           let(:invalid_update_params) { FactoryGirl.attributes_for(:user, firstname: nil) }
 
           before(:each) do
-            put :update, { id: session_user.to_param, user: invalid_update_params }
+            put :update, id: session_user.to_param, user: invalid_update_params
           end
 
           it 'does not update the requested user' do
@@ -194,7 +194,7 @@ RSpec.describe UsersController, type: :controller do
         let(:params) { FactoryGirl.attributes_for(:user) }
 
         before(:each) do
-          put :update, { id: user.to_param, user: params }
+          put :update, id: user.to_param, user: params
         end
 
         it 'does not update the requested user' do
@@ -221,7 +221,7 @@ RSpec.describe UsersController, type: :controller do
       end
 
       it 'redirects to the sign in page' do
-        put :update, { id: user.to_param, user: valid_update_params }
+        put :update, id: user.to_param, user: valid_update_params
         expect(response).to redirect_to(new_user_session_url)
       end
     end
@@ -238,18 +238,18 @@ RSpec.describe UsersController, type: :controller do
         end
 
         it 'deletes the requested user' do
-          expect {
-            delete :destroy, { id: session_user.to_param }
-          }.to change(User, :count).by(-1)
+          expect do
+            delete :destroy, id: session_user.to_param
+          end.to change(User, :count).by(-1)
         end
 
         it 'redirects to the signin page' do
-          delete :destroy, { id: session_user.to_param }
+          delete :destroy, id: session_user.to_param
           expect(response).to redirect_to(new_user_session_path)
         end
 
         it 'assigns a success message' do
-          delete :destroy, { id: session_user.to_param }
+          delete :destroy, id: session_user.to_param
           expect(flash[:success]).to eq('Account deleted.')
         end
       end
@@ -261,18 +261,18 @@ RSpec.describe UsersController, type: :controller do
           end
 
           it 'deletes the requested user' do
-            expect {
-              delete :destroy, { id: user.to_param }
-            }.to change(User, :count).by(-1)
+            expect do
+              delete :destroy, id: user.to_param
+            end.to change(User, :count).by(-1)
           end
 
           it 'redirects to the users path' do
-            delete :destroy, { id: user.to_param }
+            delete :destroy, id: user.to_param
             expect(response).to redirect_to(users_path)
           end
 
           it 'assigns a success message' do
-            delete :destroy, { id: user.to_param }
+            delete :destroy, id: user.to_param
             expect(flash[:success]).to eq('Account deleted.')
           end
         end
@@ -283,18 +283,18 @@ RSpec.describe UsersController, type: :controller do
           end
 
           it 'does not delete the requested user' do
-            expect {
-              delete :destroy, { id: user.to_param }
-            }.not_to change(User, :count)
+            expect do
+              delete :destroy, id: user.to_param
+            end.not_to change(User, :count)
           end
 
           it 'redirects to the root path' do
-            delete :destroy, { id: user.to_param }
+            delete :destroy, id: user.to_param
             expect(response).to redirect_to(root_path)
           end
 
           it 'assigns an error message' do
-            delete :destroy, { id: user.to_param }
+            delete :destroy, id: user.to_param
             expect(flash[:error]).to eq('Permission denied.')
           end
         end
@@ -303,13 +303,13 @@ RSpec.describe UsersController, type: :controller do
 
     context 'as guest user' do
       it 'does not delete the requested user' do
-        expect {
-          delete :destroy, { id: user.to_param }
-        }.not_to change(User, :count)
+        expect do
+          delete :destroy, id: user.to_param
+        end.not_to change(User, :count)
       end
 
       it 'redirects to the sign in page' do
-        delete :destroy, { id: user.to_param }
+        delete :destroy, id: user.to_param
         expect(response).to redirect_to(new_user_session_url)
       end
     end
@@ -322,7 +322,7 @@ RSpec.describe UsersController, type: :controller do
       describe 'for the current_user' do
         before(:each) do
           sign_in session_user
-          xhr :get, :edit_password, { id: session_user.to_param }
+          xhr :get, :edit_password, id: session_user.to_param
         end
 
         it 'responds with http success' do
@@ -341,7 +341,7 @@ RSpec.describe UsersController, type: :controller do
       describe 'for other users' do
         before(:each) do
           sign_in session_user
-          xhr :get, :edit_password, { id: user.to_param }
+          xhr :get, :edit_password, id: user.to_param
         end
 
         it 'redirects to the root path' do
@@ -356,12 +356,12 @@ RSpec.describe UsersController, type: :controller do
 
     context 'as guest user' do
       it 'responds with http status 401 via XHR' do
-        xhr :get, :edit_password, { id: user.to_param }
+        xhr :get, :edit_password, id: user.to_param
         expect(response).to have_http_status(:unauthorized)
       end
 
       it 'redirects to the sign in page via get' do
-        get :edit_password, { id: user.to_param }
+        get :edit_password, id: user.to_param
         expect(response).to redirect_to(new_user_session_path)
       end
     end
@@ -378,8 +378,8 @@ RSpec.describe UsersController, type: :controller do
       describe 'for the current user' do
         context 'with valid data' do
           before(:each) do
-            xhr :put, :update_password, { id: session_user.to_param,
-              user: { current_password: session_user.password, password: 'smarties', password_confirmation: 'smarties' } }
+            xhr :put, :update_password, id: session_user.to_param,
+                                        user: { current_password: session_user.password, password: 'smarties', password_confirmation: 'smarties' }
           end
 
           it 'assigns the requested user to @user' do
@@ -391,15 +391,15 @@ RSpec.describe UsersController, type: :controller do
           end
 
           it 'redirects to the updated user' do
-            expect(response.headers["Content-Type"]).to eq("text/javascript; charset=utf-8")
+            expect(response.headers['Content-Type']).to eq('text/javascript; charset=utf-8')
             expect(response.body).to include("window.location = '#{user_url(session_user)}'")
           end
         end
 
         context 'with invalid data' do
           before(:each) do
-            xhr :put, :update_password, { id: session_user.to_param,
-              user: { current_password: 'test', password: 'smarties', password_confirmation: 'smarties' } }
+            xhr :put, :update_password, id: session_user.to_param,
+                                        user: { current_password: 'test', password: 'smarties', password_confirmation: 'smarties' }
           end
 
           it 'creates error messages' do
@@ -418,8 +418,8 @@ RSpec.describe UsersController, type: :controller do
 
       describe 'for another user' do
         before(:each) do
-          xhr :put, :update_password, { id: user.to_param,
-            user: { current_password: user.password, password: 'smarties', password_confirmation: 'smarties'} }
+          xhr :put, :update_password, id: user.to_param,
+                                      user: { current_password: user.password, password: 'smarties', password_confirmation: 'smarties' }
         end
 
         it 'assigns an error message' do
@@ -430,15 +430,15 @@ RSpec.describe UsersController, type: :controller do
 
     context 'as guest user' do
       it 'responds with http status 401 via xhr' do
-        xhr :put, :update_password, { id: user.to_param,
-          user: { current_password: user.password, password: 'smarties', password_confirmation: 'smarties'} }
+        xhr :put, :update_password, id: user.to_param,
+                                    user: { current_password: user.password, password: 'smarties', password_confirmation: 'smarties' }
 
         expect(response).to have_http_status(:unauthorized)
       end
 
       it 'redirects to the signin path via put' do
-        put :update_password, { id: user.to_param,
-          user: { current_password: user.password, password: 'smarties', password_confirmation: 'smarties'} }
+        put :update_password, id: user.to_param,
+                              user: { current_password: user.password, password: 'smarties', password_confirmation: 'smarties' }
 
         expect(response).to redirect_to(new_user_session_path)
       end

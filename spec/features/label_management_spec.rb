@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe "Managing Labels", type: :feature do
+RSpec.describe 'Managing Labels', type: :feature do
   let!(:user)   { FactoryGirl.create(:user, admin: true) }
   let!(:label)  { FactoryGirl.create(:label) }
   let!(:report) { FactoryGirl.create(:report, reporter: user) }

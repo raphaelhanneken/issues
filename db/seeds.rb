@@ -10,12 +10,12 @@ User.create(email: 'root@issues.com', password: '12345678', firstname: 'Root', l
 User.create(email: 'example.user@mail.com', password: '12345687', firstname: 'Example', lastname: 'User')
 
 if Rails.env.development?
-  lorem = """
+  lorem = ''"
     Quis fuga unde numquam. Et atque aliquid asperiores officia enim quibusdam ipsam. Eius sit molestiae et in voluptatem
     quas molestiae velit. Sint laborum doloribus ut officiis quam illo. Minima hic mollitia numquam corrupti repudiandae
     animi eius eligendi. Rerum tenetur blanditiis sit rem enim. Occaecati iste cupiditate est. Repudiandae hic assumenda
     doloremque quis doloremque vero aut.
-  """
+  "''
 
   project = Project.create(name: 'Issues Dev', version: '0.1')
 

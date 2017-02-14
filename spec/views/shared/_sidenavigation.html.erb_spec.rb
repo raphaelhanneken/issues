@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe "shared/_sidenavigation", type: :view do
+RSpec.describe 'shared/_sidenavigation', type: :view do
   context 'users navigation' do
     let(:user) { FactoryGirl.build_stubbed(:user) }
 

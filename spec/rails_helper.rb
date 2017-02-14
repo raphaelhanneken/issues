@@ -2,7 +2,7 @@
 ENV['RAILS_ENV'] ||= 'test'
 require File.expand_path('../../config/environment', __FILE__)
 # Prevent database truncation if the environment is production
-abort("The Rails environment is running in production mode!") if Rails.env.production?
+abort('The Rails environment is running in production mode!') if Rails.env.production?
 require 'spec_helper'
 require 'rspec/rails'
 # Add additional requires below this line. Rails is not loaded until this point!
@@ -64,8 +64,8 @@ RSpec.configure do |config|
   config.include RSpecHtmlMatchers
 
   # Include the Devise test helpers
-  config.include Devise::Test::ControllerHelpers, :type => :controller
-  config.include Devise::Test::ControllerHelpers, :type => :view
+  config.include Devise::Test::ControllerHelpers, type: :controller
+  config.include Devise::Test::ControllerHelpers, type: :view
 
   config.include Warden::Test::Helpers
   config.before :suite do
@@ -112,7 +112,7 @@ RSpec.configure do |config|
     # with the specs, so continue to use transaction strategy for speed.
     driver_shares_db_connection_with_specs = Capybara.current_driver == :rack_test
 
-    if !driver_shares_db_connection_with_specs
+    unless driver_shares_db_connection_with_specs
       # Driver is probably for an external browser with an app
       # under test that does *not* share a database connection with the
       # specs, so use truncation strategy.

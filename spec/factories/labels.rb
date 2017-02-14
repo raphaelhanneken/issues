@@ -12,6 +12,6 @@
 FactoryGirl.define do
   factory :label, class: :label do
     title   { Faker::Lorem.word }
-    color   { "##{ Faker::Number.hexadecimal(6) }" }
+    color   { "##{Faker::Number.hexadecimal(6)}" }
   end
 end

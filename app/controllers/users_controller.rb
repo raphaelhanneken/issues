@@ -34,13 +34,12 @@ class UsersController < ApplicationController
 
   # GET /users/:id
   def show
-    @activities = PublicActivity::Activity.where("owner_id = ? OR recipient_id = ?", @user, @user)
-      .order(created_at: 'desc')
+    @activities = PublicActivity::Activity.where('owner_id = ? OR recipient_id = ?', @user, @user)
+                                          .order(created_at: 'desc')
   end
 
   # GET /users/:id/edit
-  def edit
-  end
+  def edit; end
 
   # PATCH /users/:id
   # PUT   /users/:id
@@ -53,8 +52,7 @@ class UsersController < ApplicationController
   end
 
   # GET /users/:id/edit_password
-  def edit_password
-  end
+  def edit_password; end
 
   # PUT /users/:id/update_password
   def update_password
@@ -72,29 +70,29 @@ class UsersController < ApplicationController
     if current_user.admin?
       redirect_to users_path, flash: { success: 'Account deleted.' }
     else
-      redirect_to new_user_session_path, flash: { success: 'Account deleted.'}
+      redirect_to new_user_session_path, flash: { success: 'Account deleted.' }
     end
   end
 
   private
 
-    def set_user
-      @user = User.find(params[:id])
-    end
+  def set_user
+    @user = User.find(params[:id])
+  end
 
-    def permit_params
-      params.require(:user).permit(:email, :firstname, :lastname)
-    end
+  def permit_params
+    params.require(:user).permit(:email, :firstname, :lastname)
+  end
 
-    def permit_password_params
-      params.require(:user).permit(:current_password, :password, :password_confirmation)
-    end
+  def permit_password_params
+    params.require(:user).permit(:current_password, :password, :password_confirmation)
+  end
 
-    def correct_user?
-      permission_denied unless @user == current_user
-    end
+  def correct_user?
+    permission_denied unless @user == current_user
+  end
 
-    def correct_user_or_admin?
-      correct_user? unless current_user.admin?
-    end
+  def correct_user_or_admin?
+    correct_user? unless current_user.admin?
+  end
 end

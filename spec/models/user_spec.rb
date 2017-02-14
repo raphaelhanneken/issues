@@ -31,15 +31,14 @@ RSpec.describe User, type: :model do
 
   it { is_expected.to have_many(:comments) }
 
-
   it 'has a valid factory' do
     expect(user).to be_valid
   end
 
   it 'saves a valid instance' do
-    expect {
+    expect do
       user.save!
-    }.to change(User, :count).by(1)
+    end.to change(User, :count).by(1)
   end
 
   it 'is invalid without a firstname' do

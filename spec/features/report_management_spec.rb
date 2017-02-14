@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe "Managing Reports", type: :feature do
+RSpec.describe 'Managing Reports', type: :feature do
   let(:user) { FactoryGirl.create(:user) }
 
   before(:each) do
@@ -70,7 +70,7 @@ RSpec.describe "Managing Reports", type: :feature do
   end
 
   describe 'Updating the report status' do
-    let!(:report)        { FactoryGirl.create(:report, reporter: user ) }
+    let!(:report)        { FactoryGirl.create(:report, reporter: user) }
     let!(:report_closed) { FactoryGirl.create(:report, closed: true, reporter: user) }
 
     scenario 'closing an open report' do
@@ -97,7 +97,7 @@ RSpec.describe "Managing Reports", type: :feature do
       visit report_path(report)
       click_link 'edit-assignee'
       wait_for_ajax
-      choose "#{assignee.name}"
+      choose assignee.name.to_s
       click_on 'Assign'
       wait_for_ajax
       expect(page).to have_content('Assignee updated.')
@@ -108,7 +108,7 @@ RSpec.describe "Managing Reports", type: :feature do
       visit report_path(unassigned_report)
       click_link 'Add'
       wait_for_ajax
-      choose "#{assignee.name}"
+      choose assignee.name.to_s
       click_on 'Assign'
       expect(page).to have_content('Assignee updated.')
       expect(page).to have_current_path(report_path(unassigned_report))

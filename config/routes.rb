@@ -11,7 +11,7 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :reports, :except => :destroy, shallow: true do
+  resources :reports, except: :destroy, shallow: true do
     member do
       get 'edit_assignee'
       put 'assign_to_me'

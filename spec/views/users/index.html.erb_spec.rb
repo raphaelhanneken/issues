@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe "users/index", type: :view do
+RSpec.describe 'users/index', type: :view do
   let(:user_01) { FactoryGirl.build_stubbed(:user, firstname: 'Robert', lastname: 'Plant') }
   let(:user_02) { FactoryGirl.build_stubbed(:user, firstname: 'Jimmy', lastname: 'Page') }
 

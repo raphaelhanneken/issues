@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe 'reports/_edit_labels', type: :view do
-  let!(:labels) { [FactoryGirl.build_stubbed(:label), FactoryGirl.build_stubbed(:label), FactoryGirl.build_stubbed(:label)]}
+  let!(:labels) { [FactoryGirl.build_stubbed(:label), FactoryGirl.build_stubbed(:label), FactoryGirl.build_stubbed(:label)] }
   let!(:report) { FactoryGirl.build_stubbed(:report, labels: [labels.first, labels.last]) }
 
   before(:each) do

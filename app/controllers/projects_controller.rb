@@ -19,8 +19,7 @@ class ProjectsController < ApplicationController
   end
 
   # GET /projects/:id
-  def show
-  end
+  def show; end
 
   # GET /projects/new
   def new
@@ -38,8 +37,7 @@ class ProjectsController < ApplicationController
   end
 
   # GET /projects/:id/edit
-  def edit
-  end
+  def edit; end
 
   # PATCH /projects/:id
   # PUT   /projects/:id
@@ -57,18 +55,17 @@ class ProjectsController < ApplicationController
     redirect_to projects_url, flash: { success: 'Project deleted.' }
   end
 
-
   private
 
-    def set_project
-      @project = Project.find(params[:id])
-    end
+  def set_project
+    @project = Project.find(params[:id])
+  end
 
-    def project_params
-      params.require(:project).permit(:name, :description, :version, :url, :owner_id)
-    end
+  def project_params
+    params.require(:project).permit(:name, :description, :version, :url, :owner_id)
+  end
 
-    def requires_admin
-      permission_denied unless current_user.admin?
-    end
+  def requires_admin
+    permission_denied unless current_user.admin?
+  end
 end

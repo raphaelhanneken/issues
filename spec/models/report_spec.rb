@@ -29,9 +29,9 @@ RSpec.describe Report, type: :model do
   end
 
   it 'saves a valid instance' do
-    expect {
+    expect do
       report.save!
-    }.to change(Report, :count).by(1)
+    end.to change(Report, :count).by(1)
   end
 
   it 'is invalid without title' do
@@ -109,8 +109,8 @@ RSpec.describe Report, type: :model do
 
   it 'deletes associated comments on #destroy' do
     report = FactoryGirl.create(:report_with_comments)
-    expect {
+    expect do
       report.destroy
-    }.to change(Comment, :count).by(-3)
+    end.to change(Comment, :count).by(-3)
   end
 end

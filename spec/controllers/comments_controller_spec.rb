@@ -26,13 +26,13 @@ RSpec.describe CommentsController, type: :controller do
         let(:comment) { FactoryGirl.attributes_for :comment }
 
         before(:each) do
-          post :create, { report_id: report.to_param, comment: comment }
+          post :create, report_id: report.to_param, comment: comment
         end
 
         it 'creates a new comment' do
-          expect {
-            post :create, { report_id: report.to_param, comment: comment }
-          }.to change(Comment, :count).by(1)
+          expect do
+            post :create, report_id: report.to_param, comment: comment
+          end.to change(Comment, :count).by(1)
         end
 
         it 'creates and persists a new instance of comment' do
@@ -63,7 +63,7 @@ RSpec.describe CommentsController, type: :controller do
         let(:comment) { FactoryGirl.attributes_for :comment, content: nil }
 
         before(:each) do
-          post :create, { report_id: report.to_param, comment: comment }
+          post :create, report_id: report.to_param, comment: comment
         end
 
         it 'does not create a new comment' do
@@ -85,7 +85,7 @@ RSpec.describe CommentsController, type: :controller do
       let(:comment) { FactoryGirl.attributes_for(:comment) }
 
       it 'redirects to the sign in page' do
-        post :create, { report_id: report.to_param, comment: comment }
+        post :create, report_id: report.to_param, comment: comment
         expect(response).to redirect_to new_user_session_path
       end
     end

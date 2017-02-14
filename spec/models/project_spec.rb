@@ -21,9 +21,9 @@ RSpec.describe Project, type: :model do
   end
 
   it 'saves a valid instance' do
-    expect {
+    expect do
       project.save!
-    }.to change(Project, :count).by(1)
+    end.to change(Project, :count).by(1)
   end
 
   it 'is invalid without name' do
@@ -44,8 +44,8 @@ RSpec.describe Project, type: :model do
   it 'deletes the associated reports on #destroy' do
     FactoryGirl.create(:project_with_reports)
 
-    expect {
+    expect do
       Project.last.destroy
-    }.to change(Report, :count).by(-3)
+    end.to change(Report, :count).by(-3)
   end
 end

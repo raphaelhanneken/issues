@@ -23,9 +23,9 @@ RSpec.describe Comment, type: :model do
   end
 
   it 'saves a valid instance' do
-    expect {
+    expect do
       comment.save!
-    }.to change(Comment, :count).by(1)
+    end.to change(Comment, :count).by(1)
   end
 
   it 'is invalid without content' do

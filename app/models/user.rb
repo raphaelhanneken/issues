@@ -36,7 +36,6 @@ class User < ActiveRecord::Base
   validates :lastname, presence: true,
                        length:   { within: 2..25 }
 
-
   def name
     "#{firstname} #{lastname}"
   end

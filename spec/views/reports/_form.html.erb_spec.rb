@@ -12,8 +12,8 @@ RSpec.describe 'reports/_form', type: :view do
     it 'renders a prefilled report form' do
       expect(rendered).to have_form(report_path(report), 'post') do
         with_text_field   'report[title]', report.title
-        with_text_area    'report[description]'  # value: not working yet.
-        with_select       'report[project_id]',  selected: report.project.id
+        with_text_area    'report[description]' # value: not working yet.
+        with_select       'report[project_id]', selected: report.project.id
 
         with_submit 'Update Report'
       end

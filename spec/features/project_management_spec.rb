@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe "Managing Projects", type: :feature do
+RSpec.describe 'Managing Projects', type: :feature do
   let!(:user) { FactoryGirl.create(:user, admin: true) }
 
   before(:each) do

@@ -25,13 +25,12 @@ class Report < ActiveRecord::Base
 
   has_many :comments, dependent: :destroy
 
-  scope :inbox,       -> (user) { where("closed = ? AND (assignee_id = ? OR reporter_id = ?)", false, user, user) }
-  scope :assigned_to, -> (user) { where(closed: false, assignee: user) }
-  scope :reported_by, -> (user) { where(closed: false, reporter: user) }
+  scope :inbox,       ->(user) { where('closed = ? AND (assignee_id = ? OR reporter_id = ?)', false, user, user) }
+  scope :assigned_to, ->(user) { where(closed: false, assignee: user) }
+  scope :reported_by, ->(user) { where(closed: false, reporter: user) }
   scope :open,        -> { where(closed: false) }
   scope :closed,      -> { where(closed: true) }
   scope :unassigned,  -> { where(assignee: nil) }
-
 
   validates :title, presence: true,
                     length: { maximum: 80 }
@@ -42,7 +41,6 @@ class Report < ActiveRecord::Base
   validates :project, presence: true
 
   validates :reporter, presence: true
-
 
   def assignee?(user)
     user == assignee

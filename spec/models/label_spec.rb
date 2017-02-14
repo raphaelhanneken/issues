@@ -21,9 +21,9 @@ RSpec.describe Label, type: :model do
   end
 
   it 'saves a valid instance' do
-    expect {
+    expect do
       label.save!
-    }.to change(Label, :count).by(1)
+    end.to change(Label, :count).by(1)
   end
 
   it 'is invalid without a title' do

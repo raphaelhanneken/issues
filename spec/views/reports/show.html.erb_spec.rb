@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe "reports/show", type: :view do
+RSpec.describe 'reports/show', type: :view do
   let(:comment) { FactoryGirl.build_stubbed(:user).comments.new }
   let(:report) { FactoryGirl.build_stubbed(:report) }
   let(:report_closed) { FactoryGirl.build_stubbed(:report, closed: true) }
@@ -83,7 +83,7 @@ RSpec.describe "reports/show", type: :view do
     end
 
     it 'displays an update assignee link' do
-      expect(response).to have_link("#{report.assignee.name}", href: edit_assignee_report_path(report))
+      expect(response).to have_link(report.assignee.name.to_s, href: edit_assignee_report_path(report))
     end
 
     it 'displays an edit labels link' do
@@ -120,7 +120,7 @@ RSpec.describe "reports/show", type: :view do
     end
 
     it 'displays an update assignee link' do
-      expect(response).to have_link("#{report.assignee.name}", href: edit_assignee_report_path(report))
+      expect(response).to have_link(report.assignee.name.to_s, href: edit_assignee_report_path(report))
     end
 
     it 'displays an edit labels link' do

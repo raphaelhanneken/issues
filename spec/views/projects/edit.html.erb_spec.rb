@@ -2,12 +2,12 @@ require 'rails_helper'
 
 RSpec.describe 'projects/edit', type: :view do
   let(:project) { FactoryGirl.build(:project) }
-  
+
   before(:each) do
     assign(:project, project)
     render
   end
-  
+
   it 'displays a header' do
     expect(rendered).to match("Edit #{project.name}")
   end

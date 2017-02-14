@@ -8,12 +8,12 @@ module AjaxRedirect
 
   private
 
-    def get_flash_messages(options = {})
-      if options[:flash]
-        flash[:success] = options[:flash][:success] unless options[:flash][:success].nil?
-        flash[:error]   = options[:flash][:error]   unless options[:flash][:error].nil?
-        flash[:notice]  = options[:flash][:notice]  unless options[:flash][:notice].nil?
-        flash[:info]    = options[:flash][:info]    unless options[:flash][:info].nil?
-      end
+  def get_flash_messages(options = {})
+    if options[:flash]
+      flash[:success] = options[:flash][:success] unless options[:flash][:success].nil?
+      flash[:error]   = options[:flash][:error]   unless options[:flash][:error].nil?
+      flash[:notice]  = options[:flash][:notice]  unless options[:flash][:notice].nil?
+      flash[:info]    = options[:flash][:info]    unless options[:flash][:info].nil?
     end
+  end
 end

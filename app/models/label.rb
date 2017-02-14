@@ -15,7 +15,7 @@ class Label < ActiveRecord::Base
   has_and_belongs_to_many :reports
 
   validates :title, presence: true,
-                   length: { maximum: 50 }
+                    length: { maximum: 50 }
 
   validates :color, presence: true,
                     length: { is: 7 },

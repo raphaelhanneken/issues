@@ -1,11 +1,11 @@
 require 'rails_helper'
 
-RSpec.describe "projects/new", type: :view do
+RSpec.describe 'projects/new', type: :view do
   before(:each) do
     assign(:project, Project.new)
     render
   end
-  
+
   it 'displays a header' do
     expect(rendered).to match('New Project')
   end

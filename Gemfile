@@ -1,6 +1,5 @@
 source 'https://rubygems.org'
 
-
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 4.2.0'
 
@@ -43,7 +42,7 @@ gem 'annotate_models'
 gem 'bootstrap_colorpicker_rails'
 
 # Handle file attachments with Paperclip
-#gem 'paperclip'
+# gem 'paperclip'
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'

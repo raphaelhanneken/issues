@@ -17,8 +17,7 @@ class LabelsController < ApplicationController
   before_action :requires_admin, only: [:destroy]
 
   # GET /labels/:id
-  def show
-  end
+  def show; end
 
   # GET /reports/:report_id/labels/new
   def new

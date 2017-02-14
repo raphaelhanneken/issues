@@ -1,11 +1,11 @@
 require 'rails_helper'
 
-RSpec.describe "reports/index", type: :view do
+RSpec.describe 'reports/index', type: :view do
   before(:each) do
     assign(:reports, [
-      FactoryGirl.build_stubbed(:report, title: 'Test Project 01', description: 'Lorem ipsum', created_at: Date.today - 5.days),
-      FactoryGirl.build_stubbed(:report, title: 'Test Project 02', description: 'Lorem ipsum', created_at: Date.today - 7.days)
-    ])
+             FactoryGirl.build_stubbed(:report, title: 'Test Project 01', description: 'Lorem ipsum', created_at: Date.today - 5.days),
+             FactoryGirl.build_stubbed(:report, title: 'Test Project 02', description: 'Lorem ipsum', created_at: Date.today - 7.days)
+           ])
     render
   end
 

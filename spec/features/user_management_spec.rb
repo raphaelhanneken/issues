@@ -3,7 +3,7 @@ require 'rails_helper'
 include Warden::Test::Helpers
 Warden.test_mode!
 
-RSpec.describe "Managing Users", type: :feature do
+RSpec.describe 'Managing Users', type: :feature do
   let!(:user)   { FactoryGirl.create(:user) }
   let!(:report) { FactoryGirl.create(:report) }
   let!(:admin)  { FactoryGirl.create(:user, admin: true) }

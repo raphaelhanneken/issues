@@ -52,8 +52,7 @@ class ReportsController < ApplicationController
   end
 
   # GET /reports/:id/edit
-  def edit
-  end
+  def edit; end
 
   # PATCH /reports/:id
   # PUT   /reports/:id
@@ -77,8 +76,7 @@ class ReportsController < ApplicationController
   end
 
   # GET /reports/:id/edit_assignee
-  def edit_assignee
-  end
+  def edit_assignee; end
 
   # PUT /reports/:id/update_assignee
   def update_assignee
@@ -131,39 +129,39 @@ class ReportsController < ApplicationController
 
   private
 
-    def report_params
-      params.require(:report).permit(:title, :description, :project_id, :assignee_id)
-    end
+  def report_params
+    params.require(:report).permit(:title, :description, :project_id, :assignee_id)
+  end
 
-    def set_report
-      @report = Report.find(params[:id])
-    end
+  def set_report
+    @report = Report.find(params[:id])
+  end
 
-    def set_label
-      @label = Label.find(params[:label_id])
-    end
+  def set_label
+    @label = Label.find(params[:label_id])
+  end
 
-    def is_assigned?
-      redirect_to root_path, flash: { notice: 'Already assigned.' } unless @report.assignee.nil?
-    end
+  def is_assigned?
+    redirect_to root_path, flash: { notice: 'Already assigned.' } unless @report.assignee.nil?
+  end
 
-    def correct_user?
-      permission_denied unless @report.assignee?(current_user) || @report.reporter?(current_user)
-    end
+  def correct_user?
+    permission_denied unless @report.assignee?(current_user) || @report.reporter?(current_user)
+  end
 
-    def reporter?
-      permission_denied unless @report.reporter?(current_user)
-    end
+  def reporter?
+    permission_denied unless @report.reporter?(current_user)
+  end
 
-    def filter_reports
-      case params[:filter]
-        when 'inbox'           then Report.inbox(current_user)
-        when 'assigned_to_you' then Report.assigned_to(current_user)
-        when 'reported_by_you' then Report.reported_by(current_user)
-        when 'unassigned'      then Report.unassigned
-        when 'open'            then Report.open
-        when 'closed'          then Report.closed
-        else Report.all
-      end
+  def filter_reports
+    case params[:filter]
+    when 'inbox'           then Report.inbox(current_user)
+    when 'assigned_to_you' then Report.assigned_to(current_user)
+    when 'reported_by_you' then Report.reported_by(current_user)
+    when 'unassigned'      then Report.unassigned
+    when 'open'            then Report.open
+    when 'closed'          then Report.closed
+    else Report.all
     end
+  end
 end

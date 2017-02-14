@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe "projects/show", type: :view do
+RSpec.describe 'projects/show', type: :view do
   let(:project) { FactoryGirl.build_stubbed(:project) }
 
   before(:each) do
@@ -9,7 +9,7 @@ RSpec.describe "projects/show", type: :view do
     render
   end
 
-  it "displays the project name" do
+  it 'displays the project name' do
     expect(response).to have_content(project.name)
   end
 

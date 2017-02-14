@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe "users/_password_form", type: :view do
+RSpec.describe 'users/_password_form', type: :view do
   let!(:user) { FactoryGirl.build_stubbed(:user) }
 
   before(:each) do

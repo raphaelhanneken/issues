@@ -42,39 +42,39 @@ RSpec.describe ReportsController, type: :controller do
       describe 'with filter' do
         let!(:report_01) { FactoryGirl.create(:report, reporter: user, assignee: nil) }
         let!(:report_02) { FactoryGirl.create(:report, assignee: user) }
-        let!(:report_03) { FactoryGirl.create(:report, closed: true)}
+        let!(:report_03) { FactoryGirl.create(:report, closed: true) }
 
         it 'assigns the correct subset for {}' do
           expect(assigns(:reports)).to contain_exactly report, report_01, report_02, report_03
         end
 
         it 'assigns the correct subset for :inbox' do
-          get :index, { filter: 'inbox' }
+          get :index, filter: 'inbox'
           expect(assigns(:reports)).to contain_exactly report_01, report_02
         end
 
         it 'assigns the correct subset for :assigned_to_you' do
-          get :index, { filter: 'assigned_to_you' }
+          get :index, filter: 'assigned_to_you'
           expect(assigns(:reports)).to contain_exactly report_02
         end
 
         it 'assigns the correct subset for :reported_by_you' do
-          get :index, { filter: 'reported_by_you' }
+          get :index, filter: 'reported_by_you'
           expect(assigns(:reports)).to contain_exactly report_01
         end
 
         it 'assigns the correct subset for :unassigned' do
-          get :index, { filter: 'unassigned' }
+          get :index, filter: 'unassigned'
           expect(assigns(:reports)).to contain_exactly report_01
         end
 
         it 'assigns the correct subset for :open' do
-          get :index, { filter: 'open' }
+          get :index, filter: 'open'
           expect(assigns(:reports)).to contain_exactly report, report_01, report_02
         end
 
         it 'assigns the correct subset for :closed' do
-          get :index, { filter: 'closed' }
+          get :index, filter: 'closed'
           expect(assigns(:reports)).to contain_exactly report_03
         end
       end
@@ -94,7 +94,7 @@ RSpec.describe ReportsController, type: :controller do
     context 'as signed in user' do
       before(:each) do
         sign_in user
-        get :show, { id: report.to_param }
+        get :show, id: report.to_param
       end
 
       it 'returns http success' do
@@ -112,7 +112,7 @@ RSpec.describe ReportsController, type: :controller do
 
     context 'as guest user' do
       it 'redirects to the signin page' do
-        get :show, { id: report.to_param }
+        get :show, id: report.to_param
         expect(response).to redirect_to new_user_session_url
       end
     end
@@ -156,7 +156,7 @@ RSpec.describe ReportsController, type: :controller do
         let(:report) { FactoryGirl.create(:report, reporter: user) }
 
         before(:each) do
-          get :edit, { id: report.to_param }
+          get :edit, id: report.to_param
         end
 
         it 'returns http success' do
@@ -176,7 +176,7 @@ RSpec.describe ReportsController, type: :controller do
         let(:report) { FactoryGirl.create(:report, assignee: user) }
 
         before(:each) do
-          get :edit, { id: report }
+          get :edit, id: report
         end
 
         it 'assigns an error message' do
@@ -192,7 +192,7 @@ RSpec.describe ReportsController, type: :controller do
         let(:report) { FactoryGirl.create(:report) }
 
         before(:each) do
-          get :edit, { id: report }
+          get :edit, id: report
         end
 
         it 'assigns an error message' do
@@ -207,7 +207,7 @@ RSpec.describe ReportsController, type: :controller do
 
     context 'as guest user' do
       it 'redirects to the signin page' do
-        get :edit, { id: 1 }
+        get :edit, id: 1
         expect(response).to redirect_to new_user_session_url
       end
     end
@@ -223,7 +223,7 @@ RSpec.describe ReportsController, type: :controller do
         let(:attrs) { FactoryGirl.build(:report).attributes }
 
         before(:each) do
-          xhr :post, :create, { report: attrs }
+          xhr :post, :create, report: attrs
         end
 
         it 'builds and persists a new report' do
@@ -236,13 +236,13 @@ RSpec.describe ReportsController, type: :controller do
         end
 
         it 'saves a new report' do
-          expect {
-            xhr :post, :create, { report: attrs }
-          }.to change(Report, :count).by(1)
+          expect do
+            xhr :post, :create, report: attrs
+          end.to change(Report, :count).by(1)
         end
 
         it 'renders the correct javascript' do
-          expect(response.headers["Content-Type"]).to eq("text/javascript; charset=utf-8")
+          expect(response.headers['Content-Type']).to eq('text/javascript; charset=utf-8')
           expect(response.body).to include("window.location = '#{report_url(Report.last)}'")
         end
 
@@ -255,7 +255,7 @@ RSpec.describe ReportsController, type: :controller do
         let(:attrs) { FactoryGirl.attributes_for(:report, title: '  ') }
 
         before(:each) do
-          xhr :post, :create, { report: attrs }
+          xhr :post, :create, report: attrs
         end
 
         it 'builds a new report without persisting it' do
@@ -264,9 +264,9 @@ RSpec.describe ReportsController, type: :controller do
         end
 
         it 'does not save a new report' do
-          expect {
-            xhr :post, :create, { report: attrs }
-          }.not_to change(Report, :count)
+          expect do
+            xhr :post, :create, report: attrs
+          end.not_to change(Report, :count)
         end
 
         it 'sets the reporter to the current user' do
@@ -287,18 +287,18 @@ RSpec.describe ReportsController, type: :controller do
       let(:attrs) { FactoryGirl.attributes_for(:report) }
 
       it 'does not save a new report' do
-        expect {
-          post :create, { report: attrs }
-        }.not_to change(Report, :count)
+        expect do
+          post :create, report: attrs
+        end.not_to change(Report, :count)
       end
 
       it 'redirects to the signin page' do
-        post :create, { report: attrs }
+        post :create, report: attrs
         expect(response).to redirect_to new_user_session_url
       end
 
       it 'responds with http status 401 via xhr' do
-        xhr :post, :create, { report: attrs }
+        xhr :post, :create, report: attrs
         expect(response).to have_http_status :unauthorized
       end
     end
@@ -317,7 +317,7 @@ RSpec.describe ReportsController, type: :controller do
           let(:attrs) { FactoryGirl.attributes_for(:report) }
 
           before(:each) do
-            put :update, { id: report.to_param, report: attrs }
+            put :update, id: report.to_param, report: attrs
           end
 
           it 'assigns the requested report to @report' do
@@ -346,7 +346,7 @@ RSpec.describe ReportsController, type: :controller do
           let(:attrs) { FactoryGirl.attributes_for(:report, title: '   ') }
 
           before(:each) do
-            put :update, { id: report.to_param, report: attrs }
+            put :update, id: report.to_param, report: attrs
           end
 
           it 'does not update the requested report' do
@@ -373,7 +373,7 @@ RSpec.describe ReportsController, type: :controller do
         let(:attrs)  { FactoryGirl.attributes_for(:report) }
 
         before(:each) do
-          put :update, { id: report.to_param, report: attrs }
+          put :update, id: report.to_param, report: attrs
         end
 
         it 'does not update the requested report' do
@@ -395,7 +395,7 @@ RSpec.describe ReportsController, type: :controller do
         let(:report) { FactoryGirl.create(:report) }
 
         before(:each) do
-          put :update, { id: report.to_param, report: attrs }
+          put :update, id: report.to_param, report: attrs
         end
 
         it 'does not update the requested report' do
@@ -418,13 +418,13 @@ RSpec.describe ReportsController, type: :controller do
       let(:attrs)  { FactoryGirl.attributes_for(:report) }
 
       it 'does not update the requested report' do
-        put :update, { id: report.to_param, report: attrs }
+        put :update, id: report.to_param, report: attrs
         report.reload
         expect(report).not_to eq attrs
       end
 
       it 'redirects to the signin page' do
-        put :update, { id: report.to_param, report: attrs }
+        put :update, id: report.to_param, report: attrs
         expect(response).to redirect_to new_user_session_url
       end
     end
@@ -440,7 +440,7 @@ RSpec.describe ReportsController, type: :controller do
         let(:report) { FactoryGirl.create(:report, assignee: nil) }
 
         before(:each) do
-          put :assign_to_me, { id: report.to_param }
+          put :assign_to_me, id: report.to_param
         end
 
         it 'assigns the requested report to @report' do
@@ -462,7 +462,7 @@ RSpec.describe ReportsController, type: :controller do
         let(:report)   { FactoryGirl.create(:report, assignee: assignee) }
 
         before(:each) do
-          put :assign_to_me, { id: report.to_param }
+          put :assign_to_me, id: report.to_param
         end
 
         it 'assigns the requested report to @report' do
@@ -488,7 +488,7 @@ RSpec.describe ReportsController, type: :controller do
       let(:report) { FactoryGirl.create(:report, assignee: nil) }
 
       before(:each) do
-        put :assign_to_me, { id: report.to_param }
+        put :assign_to_me, id: report.to_param
       end
 
       it 'keeps the already assigned user' do
@@ -512,7 +512,7 @@ RSpec.describe ReportsController, type: :controller do
         let(:report) { FactoryGirl.create(:report, reporter: user) }
 
         before(:each) do
-          put :close, { id: report.to_param }
+          put :close, id: report.to_param
         end
 
         it 'assigns the requested report to @report' do
@@ -537,7 +537,7 @@ RSpec.describe ReportsController, type: :controller do
         let(:report) { FactoryGirl.create(:report, assignee: user) }
 
         before(:each) do
-          put :close, { id: report.to_param }
+          put :close, id: report.to_param
         end
 
         it 'assigns the requested report to @report' do
@@ -562,7 +562,7 @@ RSpec.describe ReportsController, type: :controller do
         let(:report) { FactoryGirl.create(:report) }
 
         before(:each) do
-          put :close, { id: report.to_param }
+          put :close, id: report.to_param
         end
 
         it 'assigns the requested report to @report' do
@@ -588,12 +588,12 @@ RSpec.describe ReportsController, type: :controller do
       let(:report) { FactoryGirl.build_stubbed(:report) }
 
       it 'responds with http status 300 via xhr' do
-        xhr :put, :close, { id: report.to_param }
+        xhr :put, :close, id: report.to_param
         expect(response).to have_http_status :unauthorized
       end
 
       it 'redirects to the signin page' do
-        put :close, { id: report.to_param }
+        put :close, id: report.to_param
         expect(response).to redirect_to new_user_session_url
       end
     end
@@ -609,7 +609,7 @@ RSpec.describe ReportsController, type: :controller do
         let(:report) { FactoryGirl.create(:report, reporter: user, closed: true) }
 
         before(:each) do
-          put :open, { id: report.to_param }
+          put :open, id: report.to_param
         end
 
         it 'assigns the requested report to @report' do
@@ -634,7 +634,7 @@ RSpec.describe ReportsController, type: :controller do
         let(:report) { FactoryGirl.create(:report, assignee: user, closed: true) }
 
         before(:each) do
-          put :open, { id: report.to_param }
+          put :open, id: report.to_param
         end
 
         it 'assigns the requested report to @report' do
@@ -659,7 +659,7 @@ RSpec.describe ReportsController, type: :controller do
         let(:report) { FactoryGirl.create(:report, closed: true) }
 
         before(:each) do
-          put :open, { id: report.to_param }
+          put :open, id: report.to_param
         end
 
         it 'assigns the requested report to @report' do
@@ -685,12 +685,12 @@ RSpec.describe ReportsController, type: :controller do
       let(:report) { FactoryGirl.build_stubbed(:report) }
 
       it 'responds with http status 300 via xhr' do
-        xhr :put, :open, { id: report.to_param }
+        xhr :put, :open, id: report.to_param
         expect(response).to have_http_status :unauthorized
       end
 
       it 'redirects to the signin page' do
-        put :open, { id: report.to_param }
+        put :open, id: report.to_param
         expect(response).to redirect_to(new_user_session_url)
       end
     end
@@ -708,7 +708,7 @@ RSpec.describe ReportsController, type: :controller do
         let(:report) { FactoryGirl.create(:report, reporter: user) }
 
         before(:each) do
-          xhr :get, :edit_assignee, { id: report.to_param }
+          xhr :get, :edit_assignee, id: report.to_param
         end
 
         it 'returns http status 200' do
@@ -728,7 +728,7 @@ RSpec.describe ReportsController, type: :controller do
         let(:report) { FactoryGirl.create(:report, assignee: user) }
 
         before(:each) do
-          xhr :get, :edit_assignee, { id: report.to_param }
+          xhr :get, :edit_assignee, id: report.to_param
         end
 
         it 'returns http status 200' do
@@ -748,7 +748,7 @@ RSpec.describe ReportsController, type: :controller do
         let(:report) { FactoryGirl.create(:report) }
 
         before(:each) do
-          xhr :get, :edit_assignee, { id: report.to_param }
+          xhr :get, :edit_assignee, id: report.to_param
         end
 
         it 'redirects to the root path' do
@@ -765,12 +765,12 @@ RSpec.describe ReportsController, type: :controller do
       let(:report) { FactoryGirl.build_stubbed(:report) }
 
       it 'responds with http status 300 via xhr' do
-        xhr :get, :edit_assignee, { id: report.to_param }
+        xhr :get, :edit_assignee, id: report.to_param
         expect(response).to have_http_status :unauthorized
       end
 
       it 'redirects to the sign in path' do
-        get :edit_assignee, { id: report.to_param }
+        get :edit_assignee, id: report.to_param
         expect(response).to redirect_to new_user_session_path
       end
     end
@@ -788,7 +788,7 @@ RSpec.describe ReportsController, type: :controller do
         let!(:report) { FactoryGirl.create(:report, reporter: user) }
 
         before(:each) do
-          put :update_assignee, { id: report.to_param, report: { assignee_id: new_assignee.id } }
+          put :update_assignee, id: report.to_param, report: { assignee_id: new_assignee.id }
         end
 
         it 'assigns the requested report' do
@@ -813,7 +813,7 @@ RSpec.describe ReportsController, type: :controller do
         let!(:report) { FactoryGirl.create(:report, assignee: user) }
 
         before(:each) do
-          put :update_assignee, { id: report.to_param, report: { assignee_id: new_assignee.id } }
+          put :update_assignee, id: report.to_param, report: { assignee_id: new_assignee.id }
         end
 
         it 'assigns the requested report' do
@@ -838,7 +838,7 @@ RSpec.describe ReportsController, type: :controller do
         let(:report) { FactoryGirl.create(:report) }
 
         before(:each) do
-          put :update_assignee, { id: report.to_param, report: { assignee_id: new_assignee.id } }
+          put :update_assignee, id: report.to_param, report: { assignee_id: new_assignee.id }
         end
 
         it 'redirects to the root path' do
@@ -860,7 +860,7 @@ RSpec.describe ReportsController, type: :controller do
       let(:report) { FactoryGirl.build_stubbed(:report) }
 
       before(:each) do
-        put :update_assignee, { id: report.to_param, report: { assignee_id: new_assignee.id } }
+        put :update_assignee, id: report.to_param, report: { assignee_id: new_assignee.id }
       end
 
       it 'redirects to the signin path' do
@@ -876,7 +876,7 @@ RSpec.describe ReportsController, type: :controller do
 
         before(:each) do
           sign_in user
-          xhr :get, :edit_labels, { id: report.to_param }
+          xhr :get, :edit_labels, id: report.to_param
         end
 
         it 'responds with http status success' do
@@ -901,7 +901,7 @@ RSpec.describe ReportsController, type: :controller do
 
         before(:each) do
           sign_in user
-          xhr :get, :edit_labels, { id: report.to_param }
+          xhr :get, :edit_labels, id: report.to_param
         end
 
         it 'responds with http status success' do
@@ -926,7 +926,7 @@ RSpec.describe ReportsController, type: :controller do
 
         before(:each) do
           sign_in user
-          xhr :get, :edit_labels, { id: report.to_param }
+          xhr :get, :edit_labels, id: report.to_param
         end
 
         it 'redirects to the root path' do
@@ -941,12 +941,12 @@ RSpec.describe ReportsController, type: :controller do
 
     context 'as guest user' do
       it 'redirects to the sign in page' do
-        get :edit_labels, { id: 1 }
+        get :edit_labels, id: 1
         expect(response).to redirect_to new_user_session_path
       end
 
       it 'responds with http status 300 via xhr' do
-        xhr :get, :edit_labels, { id: 1 }
+        xhr :get, :edit_labels, id: 1
         expect(response).to have_http_status :unauthorized
       end
     end
@@ -963,7 +963,7 @@ RSpec.describe ReportsController, type: :controller do
         let(:report) { FactoryGirl.create(:report, reporter: user) }
 
         before(:each) do
-          xhr :put, :add_label, { id: report.to_param, label_id: label.to_param }
+          xhr :put, :add_label, id: report.to_param, label_id: label.to_param
         end
 
         it 'assigns the requested report' do
@@ -993,7 +993,7 @@ RSpec.describe ReportsController, type: :controller do
         let(:report) { FactoryGirl.create(:report, assignee: user) }
 
         before(:each) do
-          xhr :put, :add_label, { id: report.to_param, label_id: label.to_param }
+          xhr :put, :add_label, id: report.to_param, label_id: label.to_param
         end
 
         it 'assigns the requested report' do
@@ -1023,7 +1023,7 @@ RSpec.describe ReportsController, type: :controller do
         let(:report) { FactoryGirl.create(:report) }
 
         before(:each) do
-          xhr :put, :add_label, { id: report.to_param, label_id: label.to_param }
+          xhr :put, :add_label, id: report.to_param, label_id: label.to_param
         end
 
         it 'assigns a flash message' do
@@ -1039,12 +1039,12 @@ RSpec.describe ReportsController, type: :controller do
 
     context 'as guest user' do
       it 'redirects to the sign in page' do
-        put :add_label, { id: 1, label_id: 2 }
+        put :add_label, id: 1, label_id: 2
         expect(response).to redirect_to new_user_session_path
       end
 
       it 'return http status 300' do
-        xhr :put, :add_label, { id: 1, label_id: 2 }
+        xhr :put, :add_label, id: 1, label_id: 2
         expect(response).to have_http_status :unauthorized
       end
     end
@@ -1061,7 +1061,7 @@ RSpec.describe ReportsController, type: :controller do
         let(:report) { FactoryGirl.create(:report, reporter: user, labels: [label]) }
 
         before(:each) do
-          xhr :put, :remove_label, { id: report.to_param, label_id: label.to_param }
+          xhr :put, :remove_label, id: report.to_param, label_id: label.to_param
         end
 
         it 'assigns the requested report' do
@@ -1091,7 +1091,7 @@ RSpec.describe ReportsController, type: :controller do
         let(:report) { FactoryGirl.create(:report, assignee: user, labels: [label]) }
 
         before(:each) do
-          xhr :put, :remove_label, { id: report.to_param, label_id: label.to_param }
+          xhr :put, :remove_label, id: report.to_param, label_id: label.to_param
         end
 
         it 'assigns the requested report' do
@@ -1121,7 +1121,7 @@ RSpec.describe ReportsController, type: :controller do
         let(:report) { FactoryGirl.create(:report, labels: [label]) }
 
         before(:each) do
-          xhr :put, :remove_label, { id: report.to_param, label_id: label.to_param }
+          xhr :put, :remove_label, id: report.to_param, label_id: label.to_param
         end
 
         it 'assigns a flash message' do
@@ -1137,12 +1137,12 @@ RSpec.describe ReportsController, type: :controller do
 
     context 'as guest user' do
       it 'redirects to the sign in page' do
-        put :remove_label, { id: 1, label_id: 2 }
+        put :remove_label, id: 1, label_id: 2
         expect(response).to redirect_to new_user_session_path
       end
 
       it 'responds with http status 300 via xhr' do
-        xhr :put, :remove_label, { id: 1, label_id: 2 }
+        xhr :put, :remove_label, id: 1, label_id: 2
         expect(response).to have_http_status :unauthorized
       end
     end
