@@ -1,12 +1,7 @@
 language:
   ruby
-
-rvm:
-  2.3.3
-
+rvm: 2.3.3
 env:
   – ADAPTER=postgres
 
-before_script: psql -c 'create database issues_test;' -U postgres
-
-script: RAILS_ENV=test bundle exec rake --trace db:schema:load db:migrate spec
+script: RAILS_ENV=test bundle exec rake --trace db:create db:schema:load db:migrate rspec spec/
